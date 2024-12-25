@@ -1,33 +1,33 @@
+import '../Item.dart';
+
 abstract class DalilyState {}
 
 class DalilyInitialState extends DalilyState {}
 
 class DalilyBottomnavBarState extends DalilyState {}
+
 class UpdateRatingState extends DalilyState {
   final double newRating;
 
   UpdateRatingState(this.newRating);
 }
-class DalilySuccessState extends DalilyState {}
-class DalilyErrorState extends DalilyState {
-  final String errorMessage;
 
-  DalilyErrorState(this.errorMessage);
-}
-class DalilyLoadingState extends DalilyState {}
+class DalilyLoadedState extends DalilyState {
+  final List<Map<String, String>> data; // البيانات التي يتم تحميلها
 
-class DalilyInitial extends DalilyState {}
-
-class DalilyLoading extends DalilyState {}
-
-class DalilyLoaded extends DalilyState {
-  final List<Map<String,String>> data; // البيانات التي يتم تحميلها
-
-  DalilyLoaded(this.data);
+  DalilyLoadedState(this.data);
 }
 
-class DalilyError extends DalilyState {
+class CategoryLoadingState extends DalilyState {}
+
+class CategoryLoaded extends DalilyState {
+  final List<Category> categories;
+
+  CategoryLoaded(this.categories);
+}
+
+class CategoryError extends DalilyState {
   final String message;
 
-  DalilyError(this.message);
+  CategoryError(this.message);
 }

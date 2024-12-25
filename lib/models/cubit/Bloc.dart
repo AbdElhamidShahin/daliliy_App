@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../views/Screens/..dart';
 import '../../views/Screens/MedicalScreen.dart';
+import '../Item.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -39,16 +40,33 @@ class DalilyCubit extends Cubit<DalilyState> {
       'name': 'Medical',
       'onTap': (BuildContext context) {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MedicalScreen(),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (_) =>
+                  DalilyCubit()..fetchCategoryData('task'), // اسم الجدول
+              child: MedicalScreen(tableName: 'task'), // اسم الجدول
+            ),
+          ),
+        );
       },
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
-      'name': 'Item 2'
+      'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+      'name': 'Item 2',
+      'onTap': (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (_) =>
+              DalilyCubit()..fetchCategoryData('a'), // اسم الجدول
+              child: MedicalScreen(tableName: 'a'), // اسم الجدول
+            ),
+          ),
+        );
+      },
     },
     {
       'urlImage':
@@ -129,47 +147,31 @@ class DalilyCubit extends Cubit<DalilyState> {
     emit(UpdateRatingState(rating));
   }
 
-  List<String> images = [];
-
-
-  final supabaseClient = Supabase.instance.client;
-
-  Future<void> fetchData() async {
+  Future<void> fetchCategoryData(String tableName) async {
     try {
-      emit(DalilyLoading()); // Indicate loading state
+      emit(CategoryLoadingState());
 
-      final response = await supabaseClient
-          .from('task')
-          .select('image_url, name, description')
+      final response = await Supabase.instance.client
+          .from(tableName)
+          .select('name, description, image_url')
           .execute();
 
-      print('Response status: ${response.status}');
-      print('Response data: ${response.data}');
-
-      if (response.status != 200 || response.data == null) {
-        emit(DalilyError("Error fetching data: ${response.status}"));
+      if (response.data == null || (response.data as List).isEmpty) {
+        emit(CategoryError('No data found for table "$tableName".'));
         return;
       }
 
-      if (response.data is List && response.data.isEmpty) {
-        emit(DalilyError("No data available"));
-        return;
-      }
+      final List<Category> categories = (response.data as List).map((item) {
+        return Category(
+          name: item['name'] ?? 'No Name',
+          description: item['description'] ?? 'No Description',
+          imageUrl: item['image_url'] ?? '',
+        );
+      }).toList();
 
-      List<Map<String, String>> result = List<Map<String, String>>.from(
-        response.data.map((item) => {
-          'image_url': item['image_url'] as String,
-          'name': item['name'] as String,
-          'description': item['description'] as String,
-        }),
-      );
-
-      print('Fetched data: $result'); // Check the data structure
-
-      emit(DalilyLoaded(result)); // Emit the data as a single state
+      emit(CategoryLoaded(categories));
     } catch (e) {
-      emit(DalilyError("Failed to load data: $e"));
+      emit(CategoryError(e.toString()));
     }
   }
-
 }
