@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../views/Wedget/CarouseSlider.dart';
-import '../views/Wedget/CustomItemCatogry.dart';
+import '../views/Wedget/CustomItemCategoryBar.dart';
 import '../views/Wedget/CustomSearchItem.dart';
 
 class Wedget extends StatelessWidget {
@@ -33,7 +33,7 @@ class Wedget extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: cubit.items.map((item) {
-                      return CustomItemCategory(item: item);
+                      return CustomItemCategoryBar(item: item);
                     }).toList(),
                   ),
                 ),
@@ -46,7 +46,7 @@ class Wedget extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: cubit.items2.map((item) {
-                      return CustomItemCategory(item: item);
+                      return CustomItemCategoryBar(item: item);
                     }).toList(),
                   ),
                 ),

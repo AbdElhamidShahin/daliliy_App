@@ -1,16 +1,28 @@
 import 'package:Tourism_app/viewmodels/%D9%8BWedget.dart';
 import 'package:Tourism_app/views/Home%20Veiw.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+import 'models/cubit/Bloc.dart';
 
-  runApp(const MyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://xbnwowviustkamjpcqkh.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhibndvd3ZpdXN0a2FtanBjcWtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjQwNjIsImV4cCI6MjA1MDU0MDA2Mn0.zkE_4tRR8DXJ3y0sft21d3aHrbT-iQaXEklQTqxKrPw',
+  );
+  runApp(
+    BlocProvider<DalilyCubit>(
+      create: (_) => DalilyCubit(),
+      child: MyApp(),  // هذا هو التطبيق الرئيسي
+    ),
+  );}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
