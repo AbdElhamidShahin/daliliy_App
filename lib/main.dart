@@ -1,3 +1,4 @@
+import 'package:Tourism_app/core/constants/color.dart';
 import 'package:Tourism_app/viewmodels/%D9%8BWedget.dart';
 import 'package:Tourism_app/views/Home%20Veiw.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+        scaffoldBackgroundColor: colorV,
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

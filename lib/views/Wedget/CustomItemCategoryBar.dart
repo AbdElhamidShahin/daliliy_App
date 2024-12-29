@@ -15,6 +15,8 @@ class CustomItemCategoryBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center, // محاذاة العناصر في المنتصف
+          mainAxisSize: MainAxisSize.min, // استخدام المساحة التي يحتاجها المحتوى فقط
           children: [
             Container(
               width: 90,
@@ -38,18 +40,25 @@ class CustomItemCategoryBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
                   item['urlImage']!,
-                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.contain, // الحفاظ على الأبعاد داخل المساحة المحددة
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                item['name']!,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
+              child: SizedBox(
+                width: 90, // تحديد عرض الحاوية
+                child: Text(
+                  item['name']!,
+                  style: const TextStyle(
+                    fontSize: 16, // تحديد حجم النص
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis, // في حالة زيادة النص، يتم تقليصه
                 ),
               ),
             ),

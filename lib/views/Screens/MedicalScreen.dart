@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/Item.dart';
 import '../../models/cubit/Bloc.dart';
 import '../../models/cubit/states.dart';
 import '../Wedget/CustomItemCatogry.dart';
+import 'CustomDetailsScreen.dart';
 
 class MedicalScreen extends StatelessWidget {
-  final int? index;
+  final int? ItemCount;
   final String tableName; // اسم الجدول في قاعدة البيانات
+  final Category? category;
 
-  const MedicalScreen({Key? key, this.index, required this.tableName})
+  const MedicalScreen(
+      {Key? key, this.ItemCount, required this.tableName, this.category})
       : super(key: key);
 
   @override
@@ -40,10 +44,10 @@ class MedicalScreen extends StatelessWidget {
                       child: Center(
                         child: BlocBuilder<DalilyCubit, DalilyState>(
                           builder: (context, state) {
-                            if (state is DalilyLoadedState) {
-                              int itemCount = state.data.length;
+                            if (state is CategoryLoaded) {
+                              final itemCount = state.categories.length;
                               return Text(
-                                "$itemCount", // عرض عدد العناصر
+                                '$itemCount', // Display item count
                                 style: const TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
@@ -85,14 +89,28 @@ class MedicalScreen extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is CategoryLoaded) {
                   final categories = state.categories;
+
                   return ListView.builder(
                     itemCount: categories.length,
                     itemBuilder: (context, index) {
-                      return CustomItemCatogry(
-                        screenWidth: MediaQuery.of(context).size.width,
-                        name: categories[index].name,
-                        description: categories[index].description,
-                        imageUrl: categories[index].imageUrl,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CustomDetailsScreen(
+                                category: categories[
+                                    index], // Passing selected category
+                              ),
+                            ),
+                          );
+                        },
+                        child: CustomItemCatogry(
+                          screenWidth: MediaQuery.of(context).size.width,
+                          name: categories[index].name,
+                          description: categories[index].description,
+                          imageUrl: categories[index].imageUrl,
+                        ),
                       );
                     },
                   );

@@ -5,10 +5,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomCarouseslider extends StatelessWidget {
+class CustomCarouseSlider extends StatelessWidget {
   int _currentIndex = 0; // بداية من أول صورة
 
-  CustomCarouseslider({super.key});
+  CustomCarouseSlider({super.key});
 
   @override
   Widget build(BuildContext context) {

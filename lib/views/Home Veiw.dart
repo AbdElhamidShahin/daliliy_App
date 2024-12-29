@@ -20,15 +20,14 @@ class HomeView extends StatelessWidget {
                 cubit.currentIndex], // يعرض الشاشة بناءً على الفهرس الحالي
             bottomNavigationBar: Container(
               height: 80,
-              margin: const EdgeInsets.all(0), // إضافة مسافة حول الشريط السفلي
               decoration: BoxDecoration(
                 color: Colors.black54, // لون خلفية الشريط
                 borderRadius: BorderRadius.circular(30), // جعل الزوايا مستديرة
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
-                    blurRadius: 10,
-                    spreadRadius: 1,
+                    blurRadius: 0,
+                    spreadRadius: 0,
                   ),
                 ],
               ),

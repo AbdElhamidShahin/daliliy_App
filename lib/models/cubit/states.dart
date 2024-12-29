@@ -7,9 +7,9 @@ class DalilyInitialState extends DalilyState {}
 class DalilyBottomnavBarState extends DalilyState {}
 
 class UpdateRatingState extends DalilyState {
-  final double newRating;
+  final double rating;
 
-  UpdateRatingState(this.newRating);
+  UpdateRatingState(this.rating);
 }
 
 class DalilyLoadedState extends DalilyState {

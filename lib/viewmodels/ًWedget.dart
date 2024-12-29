@@ -9,11 +9,10 @@ import '../views/Wedget/CustomSearchItem.dart';
 
 class Wedget extends StatelessWidget {
   @override
-
   Widget build(BuildContext context) {
-    return BlocConsumer<DalilyCubit,DalilyState>(
-      listener: (BuildContext context,  state) {  },
-      builder: (BuildContext context,  state) {
+    return BlocConsumer<DalilyCubit, DalilyState>(
+      listener: (BuildContext context, state) {},
+      builder: (BuildContext context, state) {
         var cubit = DalilyCubit.get(context);
         return Scaffold(
           body: Padding(
@@ -21,12 +20,15 @@ class Wedget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Customsearchitem(),
+                CustomSearchItem(),
                 const SizedBox(height: 20),
-                CustomCarouseslider(),
-                const Text(
-                  ": خدمات طبيه",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                CustomCarouseSlider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: const Text(
+                    ": خدمات طبيه",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
                 ),
                 const SizedBox(height: 12),
                 SingleChildScrollView(
@@ -37,9 +39,12 @@ class Wedget extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
-                const Text(
-                  ": خدمات اجتماعيه ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: const Text(
+                    ": خدمات الطعام والتسوق",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
                 ),
                 const SizedBox(height: 12),
                 SingleChildScrollView(
@@ -50,6 +55,7 @@ class Wedget extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
+
               ],
             ),
           ),
