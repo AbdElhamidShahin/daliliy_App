@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class StarRating extends StatelessWidget {
   final int starCount;
   final double rating;
@@ -17,7 +17,6 @@ class StarRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // إضافة فاصل بين النجوم
       mainAxisSize: MainAxisSize.min,
       children: List.generate(
         starCount,
@@ -27,11 +26,11 @@ class StarRating extends StatelessWidget {
                 ? () => onRatingChanged!(index + 1.0)
                 : null,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0), // إضافة فاصل بين النجوم
+              padding: const EdgeInsets.only(top: 20),
               child: Icon(
                 index < rating ? Icons.star : Icons.star_border,
                 color: color,
-                size: 24.0,
+                size: 50.0,
               ),
             ),
           );

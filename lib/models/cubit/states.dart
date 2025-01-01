@@ -11,6 +11,10 @@ class UpdateRatingState extends DalilyState {
 
   UpdateRatingState(this.rating);
 }
+class UpdateFavoriteState extends DalilyState {
+  final bool isFavorite;
+  UpdateFavoriteState(this.isFavorite);
+}
 
 class DalilyLoadedState extends DalilyState {
   final List<Map<String, String>> data; // البيانات التي يتم تحميلها

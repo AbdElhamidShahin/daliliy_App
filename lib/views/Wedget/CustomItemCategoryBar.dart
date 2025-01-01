@@ -38,10 +38,10 @@ class CustomItemCategoryBar extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(
+                child: Image.asset(
                   item['urlImage']!,
-                  height: 100,
-                  width: 100,
+                  height: 50,
+                  width: 50,
                   fit: BoxFit.contain, // الحفاظ على الأبعاد داخل المساحة المحددة
                 ),
               ),
@@ -50,15 +50,18 @@ class CustomItemCategoryBar extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 width: 90, // تحديد عرض الحاوية
-                child: Text(
-                  item['name']!,
-                  style: const TextStyle(
-                    fontSize: 16, // تحديد حجم النص
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+
+                  child: Text(
+                    item['name']!,
+                    style: const TextStyle(
+                      fontSize: 16, // تحديد حجم النص
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis, // في حالة زيادة النص، يتم تقليصه
                 ),
               ),
             ),

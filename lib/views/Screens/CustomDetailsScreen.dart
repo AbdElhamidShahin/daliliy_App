@@ -1,26 +1,24 @@
-import 'dart:ui';
-
+import 'package:Tourism_app/core/constants/color.dart';
 import 'package:Tourism_app/models/cubit/Bloc.dart';
 import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:Tourism_app/views/Wedget/CarouseSlider.dart';
+import 'package:Tourism_app/views/Wedget/CustomIconDown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../core/helpers/StarRating.dart';
 import '../../models/Item.dart';
-import '../Wedget/buildSocialIcon.dart';
+import '../Wedget/CustomSohialCatogey.dart';
+import '../Wedget/IconFavorite.dart';
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
-
-  const CustomDetailsScreen({
-    super.key,
-    required this.category,
-  });
+   final bool? isFavorite;
+   CustomDetailsScreen({super.key, required this.category,  this.isFavorite});
 
   @override
   Widget build(BuildContext context) {
+    bool isFavoriteValue = isFavorite ?? false;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -46,14 +44,10 @@ class CustomDetailsScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  // 1/5 for Icon
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.favorite_border, size: 32)),
-                  ),
-                  // 2/5 for text (title, subtitle, and rating)
+
+
+                  Iconfavorite(isFavorite: isFavoriteValue, category: category),
+
                   Expanded(
                     flex: 2,
                     child: Padding(
@@ -127,10 +121,10 @@ class CustomDetailsScreen extends StatelessWidget {
           ),
           CustomCarouseSlider(),
           Container(
-            color: Colors.grey,
-            height: 150,
+            color: colorD,
+            height: 210,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
               child: Column(
                 children: [
                   const Text(
@@ -142,74 +136,51 @@ class CustomDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 18),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildSocialIcon(
-                        icon: Icons.facebook,
-                        color: Colors.blue,
-                        label: 'FaceBook',
-                        url: 'https://www.facebook.com',
-                      ),
-                      buildSocialIcon(
-                        icon: Icons.video_library,
-                        color: Colors.red,
-                        label: 'YouTube',
-                        url: 'https://www.youtube.com',
-                      ),
-                      buildSocialIcon(
-                        icon: Icons.camera_alt,
-                        color: Colors.purple,
-                        label: 'Instagram',
-                        url: 'https://www.instagram.com',
-                      ),
-                      buildSocialIcon(
-                        icon: Icons.web,
-                        color: Colors.green,
-                        label: 'Website',
-                        url: 'https://www.example.com',
-                      ),
-                    ],
-                  ),
+                  Customsohialcatogey(),
                 ],
               ),
+            ),
+          ),
+          Center(
+            child: BlocBuilder<DalilyCubit, DalilyState>(
+              builder: (BuildContext context, state) {
+                var cubit = DalilyCubit.get(context);
+                return StarRating(
+                  rating: cubit.rating,
+                  onRatingChanged: (newRating) {
+                    cubit.RatingState(newRating); // Update rating
+                  },
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 20,),
+          Center(
+            child: Container(
+              width: 160,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32), color: colorA),
+              child: Center(
+                  child: Text(
+                'تقييم',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24),
+              )),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomIcon(Icons.location_on),
-              CustomIcon(Icons.location_on),
-              CustomIcon(Icons.call),
+              CustomIconDown(Icons.location_on,Colors.cyan ),
+              CustomIconDown(Icons.location_on,Colors.grey),
+              CustomIconDown(Icons.call,colorA),
             ],
           )
         ]),
       ),
     );
   }
-}
-
-void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-Widget CustomIcon(IconData icon) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 50, right: 10, bottom: 20),
-    child: Container(
-      width: 120,
-      height: 45,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
-          color: Color.fromARGB(255, 69, 187, 205)),
-      child: Icon(
-        icon,
-        color: Colors.white,
-      ),
-    ),
-  );
 }

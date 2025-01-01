@@ -3,8 +3,10 @@ import 'package:Tourism_app/viewmodels/%D9%8BWedget.dart';
 import 'package:Tourism_app/views/Home%20Veiw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'models/Item.dart';
 import 'models/cubit/Bloc.dart';
 
 void main() async {
@@ -15,11 +17,18 @@ void main() async {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhibndvd3ZpdXN0a2FtanBjcWtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjQwNjIsImV4cCI6MjA1MDU0MDA2Mn0.zkE_4tRR8DXJ3y0sft21d3aHrbT-iQaXEklQTqxKrPw',
   );
   runApp(
-    BlocProvider<DalilyCubit>(
-      create: (_) => DalilyCubit(),
-      child: MyApp(),  // هذا هو التطبيق الرئيسي
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ItemProvider()), // FavoriteProvider
+      ],
+      child: BlocProvider<DalilyCubit>(
+        create: (_) => DalilyCubit(),
+        child: MyApp(), // Main app widget
+      ),
     ),
-  );}
+  );
+
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,6 +38,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: colorV
+        ),
         scaffoldBackgroundColor: colorV,
         useMaterial3: true,
       ),

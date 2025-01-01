@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'Wedget/IconFavorite.dart';
+
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+   SettingScreen({super.key});
 
   @override
+  late bool isFavorite = false;
+
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Center(child: Text("data"),);
   }
 }

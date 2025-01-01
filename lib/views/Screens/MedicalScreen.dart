@@ -1,3 +1,4 @@
+import 'package:Tourism_app/core/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,16 +22,15 @@ class MedicalScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(238, 220, 250, 255),
-      appBar: AppBar(
-        title: const Text('Medical Screen'),
-      ),
+      backgroundColor: colorV,
       body: Column(
         children: [
-          // Header Section
+          SizedBox(
+            height: 20,
+          ),
           Container(
             height: 50,
-            decoration: const BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: colorA),
             child: Row(
               children: [
                 Padding(
