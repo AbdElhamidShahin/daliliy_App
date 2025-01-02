@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Item.dart';
+import 'Wedget/IconFavorite.dart';
 
 class FavoriteScreen extends StatelessWidget {
   @override
@@ -33,6 +34,8 @@ class FavoriteScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
+
+                  IconfavoriteDelate(category: item,),
                   Expanded(
                     flex: 2,
                     child: Padding(

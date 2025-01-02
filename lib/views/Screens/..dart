@@ -1,189 +1,90 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-//
-// class Exercise {
-//   final String title;
-//   final String details;
-//   final String image;
-//   final List<String> instructions;
-//
-//   Exercise({
-//     required this.title,
-//     required this.details,
-//     required this.image,
-//     required this.instructions,
-//   });
-// }
-//
-// class ExerciseScreen extends StatelessWidget {
-//   final String currentDay;
-//
-//   ExerciseScreen({Key? key, required this.currentDay}) : super(key: key);
-//
-//   final List<Exercise> exercises = [
-//     Exercise(
-//       title: 'تمرين الضغط',
-//       details: 'تمرين رائع لتقوية عضلات الصدر والذراعين.',
-//       image: 'assets/images/pushup.jpg',
-//       instructions: ['وضعية الجسم مستقيمة', 'النزول والصعود ببطء'],
-//     ),
-//     Exercise(
-//       title: 'تمرين السكوات',
-//       details: 'يساعد في تقوية عضلات الساقين والمؤخرة.',
-//       image: 'assets/images/squat.jpg',
-//       instructions: ['الحفاظ على الظهر مستقيم', 'النزول للأسفل بثبات'],
-//     ),
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.grey[500],
-//       appBar: AppBar(
-//         title: Text(' $currentDay'),
-//       ),
-//       body: exercises.isNotEmpty
-//           ? ListView.builder(
-//         itemCount: exercises.length,
-//         itemBuilder: (context, index) {
-//           final item = exercises[index];
-//           return ExerciseCard(exercise: item);
-//         },
-//       )
-//           : Center(
-//         child: Text(
-//           'لا توجد تمارين متاحة',
-//           style: GoogleFonts.changa(
-//             fontSize: 20,
-//             color: Colors.amber,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// class ExerciseCard extends StatelessWidget {
-//   final Exercise exercise;
-//
-//   const ExerciseCard({Key? key, required this.exercise}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () => _showDialog(context, exercise),
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-//         child: Container(
-//           height: 150,
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(20),
-//             color: Colors.white30,
-//             boxShadow: [
-//               BoxShadow(
-//                 color: Colors.black.withOpacity(0.2),
-//                 spreadRadius: 2,
-//                 blurRadius: 5,
-//                 offset: Offset(0, 3),
-//               ),
-//             ],
-//           ),
-//           child: Row(
-//             children: [
-//               Container(
-//                 width: 150,
-//                 height: 150,
-//                 decoration: BoxDecoration(
-//                   borderRadius: const BorderRadius.only(
-//                     topLeft: Radius.circular(20),
-//                     bottomLeft: Radius.circular(20),
-//                   ),
-//                   image: DecorationImage(
-//                     image: AssetImage(exercise.image),
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 20),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.end,
-//                     children: [
-//                       Text(
-//                         exercise.title,
-//                         style: GoogleFonts.changa(
-//                           fontSize: 20,
-//                           color: Colors.amber,
-//                           fontWeight: FontWeight.bold,
-//                         ),
-//                       ),
-//                       Text(
-//                         exercise.details,
-//                         style: GoogleFonts.changa(
-//                           fontSize: 16,
-//                           color: Colors.white,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-//
-//   void _showDialog(BuildContext context, Exercise exercise) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           backgroundColor: const Color(0xFF212121),
-//           content: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             crossAxisAlignment: CrossAxisAlignment.end,
-//             children: [
-//               Image.asset(
-//                 exercise.image,
-//                 fit: BoxFit.cover,
-//               ),
-//               const SizedBox(height: 10),
-//               Text(
-//                 exercise.title,
-//                 style: GoogleFonts.changa(
-//                   fontSize: 24,
-//                   fontWeight: FontWeight.bold,
-//                   color: Colors.white,
-//                 ),
-//                 textAlign: TextAlign.right,
-//               ),
-//               const SizedBox(height: 10),
-//               Text(
-//                 exercise.details,
-//                 style: GoogleFonts.changa(
-//                   fontSize: 18,
-//                   color: Colors.white70,
-//                 ),
-//                 textAlign: TextAlign.right,
-//               ),
-//             ],
-//           ),
-//           actions: [
-//             TextButton(
-//               onPressed: () {
-//                 Navigator.pop(context);
-//               },
-//               child: Text(
-//                 'إغلاق',
-//                 style: GoogleFonts.changa(color: Colors.amber),
-//               ),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class DataEntryPage extends StatefulWidget {
+  @override
+  _DataEntryPageState createState() => _DataEntryPageState();
+}
+
+class _DataEntryPageState extends State<DataEntryPage> {
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _imageUrlController = TextEditingController();
+
+  // متغير لتخزين حالة التحميل
+  bool _isLoading = false;
+
+  // الدالة لإرسال البيانات إلى Supabase
+  Future<void> _submitData() async {
+    final name = _nameController.text;
+    final description = _descriptionController.text;
+    final imageUrl = _imageUrlController.text;
+
+    if (name.isEmpty || description.isEmpty || imageUrl.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('يرجى ملء جميع الحقول بشكل صحيح')));
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await Supabase.instance.client
+          .from('items') // استبدل بـاسم الجدول الخاص بك في Supabase
+          .insert([
+        {
+          'name': name,
+          'description': description,
+          'imageUrl': imageUrl,
+        }
+      ]).execute();
+
+      // التحقق من حالة الاستجابة
+      if (response.status == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تم إرسال البيانات بنجاح')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('حدث خطأ: ${response.error?.message}')));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('حدث خطأ')));
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('إدخال البيانات')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(labelText: 'الاسم'),
+            ),
+            TextField(
+              controller: _descriptionController,
+              decoration: InputDecoration(labelText: 'الوصف'),
+            ),
+            TextField(
+              controller: _imageUrlController,
+              decoration: InputDecoration(labelText: 'رابط الصورة'),
+            ),
+            SizedBox(height: 20),
+            _isLoading
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+              onPressed: _submitData,
+              child: Text('إرسال البيانات'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

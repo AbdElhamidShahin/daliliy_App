@@ -5,13 +5,13 @@ class StarRating extends StatelessWidget {
   final double rating;
   final Color color;
   final void Function(double)? onRatingChanged;
-
-  const StarRating({
+  final double? size;
+   StarRating({
     Key? key,
     this.starCount = 5,
     required this.rating,
     this.color = Colors.amber,
-    this.onRatingChanged,
+    this.onRatingChanged, this.size,
   }) : super(key: key);
 
   @override
@@ -25,13 +25,11 @@ class StarRating extends StatelessWidget {
             onTap: onRatingChanged != null
                 ? () => onRatingChanged!(index + 1.0)
                 : null,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Icon(
-                index < rating ? Icons.star : Icons.star_border,
-                color: color,
-                size: 50.0,
-              ),
+            child: Icon(
+              index < rating ? Icons.star : Icons.star_border,
+              color: color,
+
+              size:size,
             ),
           );
         },

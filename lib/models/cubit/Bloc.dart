@@ -22,7 +22,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   List<Widget> screens = [
     Wedget(),
     FavoriteScreen(),
-    SettingScreen(),
+    DataEntryPage(),
   ];
 
   void changeBottomNavBar(int index) {
@@ -430,5 +430,6 @@ class DalilyCubit extends Cubit<DalilyState> {
   void updateFavoriteState(bool newState) {
     isFavorite = newState;
     emit(UpdateFavoriteState(isFavorite));
+    print(isFavorite);
   }
 }

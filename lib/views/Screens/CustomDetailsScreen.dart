@@ -12,13 +12,10 @@ import '../Wedget/IconFavorite.dart';
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
-   final bool? isFavorite;
-   CustomDetailsScreen({super.key, required this.category,  this.isFavorite});
+  const CustomDetailsScreen({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    bool isFavoriteValue = isFavorite ?? false;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -35,7 +32,7 @@ class CustomDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10, left: 10, top: 0),
             child: Container(
               height: 120,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 minHeight: 120,
               ),
               decoration: BoxDecoration(
@@ -44,9 +41,7 @@ class CustomDetailsScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-
-
-                  Iconfavorite(isFavorite: isFavoriteValue, category: category),
+                  Iconfavorite(category: category),
 
                   Expanded(
                     flex: 2,
@@ -58,12 +53,12 @@ class CustomDetailsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Text(
                               category.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 24),
                             ),
                           ],
@@ -96,7 +91,7 @@ class CustomDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(
               left: 20,
               right: 20,
@@ -111,7 +106,7 @@ class CustomDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               category.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black54,
                 fontSize: 20,
@@ -123,11 +118,11 @@ class CustomDetailsScreen extends StatelessWidget {
           Container(
             color: colorD,
             height: 210,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 30),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'تابعونا علي ',
                     style: TextStyle(
                       color: Colors.black,
@@ -135,7 +130,7 @@ class CustomDetailsScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 18),
+                  SizedBox(height: 18),
                   Customsohialcatogey(),
                 ],
               ),
@@ -145,7 +140,7 @@ class CustomDetailsScreen extends StatelessWidget {
             child: BlocBuilder<DalilyCubit, DalilyState>(
               builder: (BuildContext context, state) {
                 var cubit = DalilyCubit.get(context);
-                return StarRating(
+                return StarRating(size: 50,
                   rating: cubit.rating,
                   onRatingChanged: (newRating) {
                     cubit.RatingState(newRating); // Update rating
@@ -154,14 +149,16 @@ class CustomDetailsScreen extends StatelessWidget {
               },
             ),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           Center(
             child: Container(
               width: 160,
               height: 60,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32), color: colorA),
-              child: Center(
+              child: const Center(
                   child: Text(
                 'تقييم',
                 style: TextStyle(
@@ -174,9 +171,9 @@ class CustomDetailsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomIconDown(Icons.location_on,Colors.cyan ),
-              CustomIconDown(Icons.location_on,Colors.grey),
-              CustomIconDown(Icons.call,colorA),
+              CustomIconDown(Icons.location_on, Colors.cyan),
+              CustomIconDown(Icons.location_on, Colors.grey),
+              CustomIconDown(Icons.call, colorA),
             ],
           )
         ]),

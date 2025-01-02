@@ -25,9 +25,7 @@ class MedicalScreen extends StatelessWidget {
       backgroundColor: colorV,
       body: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+
           Container(
             height: 50,
             decoration: BoxDecoration(color: colorA),
@@ -105,7 +103,7 @@ class MedicalScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: CustomItemCatogry(
+                        child: CustomItemCategory(
                           screenWidth: MediaQuery.of(context).size.width,
                           name: categories[index].name,
                           description: categories[index].description,
