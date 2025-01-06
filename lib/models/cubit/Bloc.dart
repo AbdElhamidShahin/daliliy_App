@@ -7,9 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../views/Screens/..dart';
+import '../../views/Screens/.0.dart';
 import '../../views/Screens/MedicalScreen.dart';
-import '../../views/SettingScreen.dart';
-import '../../views/Wedget/IconFavorite.dart';
 import '../Item.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
@@ -22,7 +21,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   List<Widget> screens = [
     Wedget(),
     FavoriteScreen(),
-    DataEntryPage(),
+    DataEntryPage (),
   ];
 
   void changeBottomNavBar(int index) {
@@ -38,7 +37,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   final List<Map<String, dynamic>> items = [
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/9233795_4116139.jpg',
       'name': 'الصيداليات',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -55,7 +54,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/rb_51672.png',
       'name': 'المعامل ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -72,7 +71,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/24237740_6911014.jpg',
       'name': 'أطفال ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -89,7 +88,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/rb_103308.png',
       'name': 'أسنان ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -106,7 +105,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/18329494_5964859.jpg',
       'name': 'عظام ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -123,7 +122,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/26232793_7206784.jpg',
       'name': 'أشعه ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -140,7 +139,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/flat-style-character-design_839035-1824362.jpg',
       'name': 'جلديه ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -157,7 +156,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/rb_6987.png',
       'name': 'قلب  ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -174,7 +173,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/rb_2150836985.png',
       'name': 'سكر ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -191,7 +190,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'https://i.pinimg.com/736x/be/b0/0e/beb00e4a420438fc0cdfa3d280e4662a.jpg',
+          'assets/Catogry1/caucasian-white-physiotherapist-doctor-checking-260nw-1054540445.webp',
       'name': 'علاج طبيعي ',
       'onTap': (BuildContext context) {
         Navigator.push(

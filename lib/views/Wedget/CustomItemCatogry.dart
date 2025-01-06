@@ -1,7 +1,11 @@
 import 'package:Tourism_app/core/constants/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import '../../core/helpers/StarRating.dart';
 import '../../models/Item.dart';
+import '../../models/cubit/Bloc.dart';
+import '../../models/cubit/states.dart';
 import 'IconFavorite.dart';
 
 class CustomItemCategory extends StatelessWidget {
@@ -14,6 +18,7 @@ class CustomItemCategory extends StatelessWidget {
     this.category,
     this.screenHeight,
   });
+
   final Category? category;
   final double? screenWidth;
   final double? screenHeight;
@@ -42,7 +47,11 @@ class CustomItemCategory extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: Iconfavorite(category: category),
+                  child: Iconfavorite(
+                      category: Category(
+                          name: name,
+                          description: description,
+                          imageUrl: imageUrl)),
                 ),
                 Expanded(
                   flex: 2,
@@ -55,7 +64,7 @@ class CustomItemCategory extends StatelessWidget {
                         children: [
                           const SizedBox(height: 12),
                           Text(
-                            category != null ? category!.name : 'اsسم ',
+                            name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: screenWidth! * 0.06, // حجم خط ديناميكي

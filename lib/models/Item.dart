@@ -6,8 +6,10 @@ class Category {
   final String name;
   final String description;
   final String imageUrl;
+  final int? number;
 
   Category({
+    this.number,
     required this.name,
     required this.description,
     required this.imageUrl,
@@ -18,6 +20,8 @@ class Category {
       'name': name,
       'description': description,
       'imageUrl': imageUrl,
+      'number': number,
+
     };
   }
 
@@ -26,6 +30,7 @@ class Category {
       name: json['name'],
       description: json['description'],
       imageUrl: json['imageUrl'],
+      number: json['number'],
     );
   }
 }
@@ -37,6 +42,9 @@ class ItemProvider with ChangeNotifier {
 
   ItemProvider() {
     _loadFavorites();
+  }
+  bool isFavorite(Category category) {
+    return _favorites.contains(category);
   }
 
   void addToFavorites(Category category) async {

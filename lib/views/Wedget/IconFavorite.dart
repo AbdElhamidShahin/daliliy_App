@@ -41,6 +41,7 @@ class Iconfavorite extends StatelessWidget {
     );
   }
 }
+
 class IconfavoriteDelate extends StatelessWidget {
   final Category? category;
 
@@ -67,7 +68,7 @@ class IconfavoriteDelate extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-               Icons.delete,
+              Icons.delete,
               size: 32,
               color: isFavorite ? Colors.red : Colors.grey,
             ),

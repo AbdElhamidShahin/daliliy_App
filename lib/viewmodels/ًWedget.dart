@@ -35,7 +35,7 @@ class Wedget extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: cubit.items2.map((item) {
+                      children: cubit.items.map((item) {
                         return CustomItemCategoryBar(item: item);
                       }).toList(),
                     ),

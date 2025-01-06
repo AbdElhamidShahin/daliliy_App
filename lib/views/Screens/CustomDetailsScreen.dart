@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Tourism_app/core/constants/color.dart';
 import 'package:Tourism_app/models/cubit/Bloc.dart';
 import 'package:Tourism_app/models/cubit/states.dart';
@@ -5,6 +7,7 @@ import 'package:Tourism_app/views/Wedget/CarouseSlider.dart';
 import 'package:Tourism_app/views/Wedget/CustomIconDown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/helpers/StarRating.dart';
 import '../../models/Item.dart';
 import '../Wedget/CustomSohialCatogey.dart';
@@ -12,7 +15,8 @@ import '../Wedget/IconFavorite.dart';
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
-  const CustomDetailsScreen({super.key, required this.category});
+  String text = '';
+  CustomDetailsScreen({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +144,8 @@ class CustomDetailsScreen extends StatelessWidget {
             child: BlocBuilder<DalilyCubit, DalilyState>(
               builder: (BuildContext context, state) {
                 var cubit = DalilyCubit.get(context);
-                return StarRating(size: 50,
+                return StarRating(
+                  size: 50,
                   rating: cubit.rating,
                   onRatingChanged: (newRating) {
                     cubit.RatingState(newRating); // Update rating
@@ -171,13 +176,39 @@ class CustomDetailsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomIconDown(Icons.location_on, Colors.cyan),
-              CustomIconDown(Icons.location_on, Colors.grey),
-              CustomIconDown(Icons.call, colorA),
+              CustomIconDown(
+                icon: Icons.location_on,
+                onTap: () {},
+                color: Colors.cyan,
+              ),
+              CustomIconDown(
+                icon: Icons.location_on,
+                color: Colors.grey,
+                onTap: () {
+                  launchWhatsApp(phone: "201205687372");
+
+                },
+              ),
+              CustomIconDown(
+                icon: Icons.call,
+                color: colorA,
+                onTap: () {
+                  launch('tel://${category.number}');
+                },
+              )
             ],
           )
         ]),
       ),
     );
+  }
+}
+void launchWhatsApp({required String phone}) async {
+  final url = "https://wa.me/$phone";
+
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

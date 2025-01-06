@@ -59,6 +59,9 @@ dependencies:
   supabase: ^1.11.11
   postgrest: ^1.5.2
   app_links: ^3.5.1
+  image_picker: ^0.8.5+3
+  path_provider: ^2.0.11
+  fluttertoast: ^8.1.2
 
 
 
