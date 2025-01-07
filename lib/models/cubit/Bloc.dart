@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../views/Screens/.0.dart';
 import '../../views/Screens/MedicalScreen.dart';
+import '../../views/SettingScreen.dart';
 import '../Item.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
@@ -18,7 +19,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   List<Widget> screens = [
     Wedget(),
     FavoriteScreen(),
-    UserInputPage(),
+    ImageAndDataUploadPage(),
   ];
 
   void changeBottomNavBar(int index) {
@@ -420,4 +421,6 @@ class DalilyCubit extends Cubit<DalilyState> {
     emit(UpdateFavoriteState(isFavorite));
     print(isFavorite);
   }
+
+
 }
