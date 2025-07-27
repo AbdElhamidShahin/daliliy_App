@@ -1,7 +1,9 @@
+import 'package:Tourism_app/models/ItemscCategory.dart' show items2;
 import 'package:Tourism_app/models/cubit/Bloc.dart';
 import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../models/ItemscCategory.dart';
 import '../views/Wedget/CarouseSlider.dart';
 import '../views/Wedget/CustomItemCategoryBar.dart';
 import '../views/Wedget/CustomSearchItem.dart';

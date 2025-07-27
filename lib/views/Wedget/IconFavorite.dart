@@ -3,7 +3,8 @@ import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import '../../models/Item.dart';
+import '../../models/Item/Item.dart';
+import '../../models/Item/ItemProvider.dart';
 
 class Iconfavorite extends StatelessWidget {
   final Category? category;

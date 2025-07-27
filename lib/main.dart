@@ -1,26 +1,25 @@
 import 'package:Tourism_app/core/constants/color.dart';
-import 'package:Tourism_app/viewmodels/%D9%8BWedget.dart';
 import 'package:Tourism_app/views/Home%20Veiw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/services.dart';
-
-import 'models/Item.dart';
+import 'models/Item/ItemProvider.dart';
 import 'models/cubit/Bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-    url: 'https://xbnwowviustkamjpcqkh.supabase.co',
+    url: 'https://svguqpavelimqbxmzgpl.supabase.co',
     anonKey:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhibndvd3ZpdXN0a2FtanBjcWtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NjQwNjIsImV4cCI6MjA1MDU0MDA2Mn0.zkE_4tRR8DXJ3y0sft21d3aHrbT-iQaXEklQTqxKrPw',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2Z3VxcGF2ZWxpbXFieG16Z3BsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNjg1MzgsImV4cCI6MjA2MjY0NDUzOH0.nN-SS7I47cdHmlJFpsyolJmceSWgXZQHLZM4tlBRMAQ',
   );
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ItemProvider()), // FavoriteProvider
+        ChangeNotifierProvider(
+            create: (_) => ItemProvider()), // FavoriteProvider
       ],
       child: BlocProvider<DalilyCubit>(
         create: (_) => DalilyCubit(),

@@ -4,10 +4,9 @@ import 'package:Tourism_app/views/FavoriteScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../../views/Screens/.0.dart';
 import '../../views/Screens/MedicalScreen.dart';
-import '../../views/SettingScreen.dart';
-import '../Item.dart';
+import '../../views/Screens/dataUploadPage.dart';
+import '../Item/Item.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -19,7 +18,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   List<Widget> screens = [
     Wedget(),
     FavoriteScreen(),
-    ImageAndDataUploadPage(),
+    AddCategoryPage(),
   ];
 
   void changeBottomNavBar(int index) {
@@ -42,8 +41,8 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('task'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'task'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
             ),
           ),
         );
@@ -58,8 +57,8 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
             ),
           ),
         );
@@ -74,8 +73,8 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
             ),
           ),
         );
@@ -91,7 +90,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -107,7 +106,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -123,7 +122,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -140,7 +139,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -156,7 +155,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -172,7 +171,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -189,7 +188,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -207,7 +206,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -223,7 +222,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -255,7 +254,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -288,7 +287,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -322,7 +321,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -338,7 +337,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -355,7 +354,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -371,7 +370,7 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child:const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
             ),
           ),
         );
@@ -383,21 +382,27 @@ class DalilyCubit extends Cubit<DalilyState> {
     try {
       emit(CategoryLoadingState());
 
-      final response = await Supabase.instance.client
-          .from(tableName)
-          .select('name, description, image_url')
-          .execute();
+      final response = await Supabase.instance.client.from(tableName).select(
+          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
 
-      if (response.data == null || (response.data as List).isEmpty) {
+      if (response.isEmpty) {
         emit(CategoryError('No data found for table "$tableName".'));
         return;
       }
 
-      final List<Category> categories = (response.data as List).map((item) {
+      final List<Category> categories = response.map((item) {
         return Category(
+          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
-          imageUrl: item['image_url'] ?? '',
+          imageUrl: item['imageUrl'] ?? '',
+          facebookLink: item['facebookLink'] ?? '',
+          youtypeLink: item['youtypeLink'] ?? '',
+          whatsAppLink: item['whatsAppLink'] ?? '',
+          locationLink: item['locationLink'] ?? '',
+          phoneLink: item['phoneLink'] ?? '',
+          location: item['location'] ?? '',
+          number: item['number'] ?? '',
         );
       }).toList();
 
@@ -408,7 +413,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   }
 
   double rating = 2;
-  void  RatingState(double newRating) {
+  void RatingState(double newRating) {
     rating = newRating;
 
     emit(UpdateRatingState(rating));
@@ -421,6 +426,4 @@ class DalilyCubit extends Cubit<DalilyState> {
     emit(UpdateFavoriteState(isFavorite));
     print(isFavorite);
   }
-
-
 }

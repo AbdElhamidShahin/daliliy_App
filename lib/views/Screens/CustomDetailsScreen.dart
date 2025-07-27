@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/helpers/StarRating.dart';
-import '../../models/Item.dart';
+import '../../models/Item/Item.dart';
 import '../Wedget/CustomSohialCatogey.dart';
 import '../Wedget/IconFavorite.dart';
 

@@ -1,31 +1,20 @@
 import 'package:Tourism_app/core/constants/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import '../../core/helpers/StarRating.dart';
-import '../../models/Item.dart';
-import '../../models/cubit/Bloc.dart';
-import '../../models/cubit/states.dart';
-import 'IconFavorite.dart';
+import '../../models/Item/Item.dart';
+
 
 class CustomItemCategory extends StatelessWidget {
   const CustomItemCategory({
     super.key,
     this.screenWidth,
-    required this.imageUrl,
-    required this.name,
-    required this.description,
-    this.category,
+    required this.category,
     this.screenHeight,
   });
 
-  final Category? category;
+  final Category category;
   final double? screenWidth;
   final double? screenHeight;
-
-  final String name;
-  final String description;
-  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +34,6 @@ class CustomItemCategory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Iconfavorite(
-                      category: Category(
-                          name: name,
-                          description: description,
-                          imageUrl: imageUrl)),
-                ),
                 Expanded(
                   flex: 2,
                   child: Padding(
@@ -64,7 +45,7 @@ class CustomItemCategory extends StatelessWidget {
                         children: [
                           const SizedBox(height: 12),
                           Text(
-                            name,
+                            category.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: screenWidth! * 0.06, // حجم خط ديناميكي
@@ -72,7 +53,7 @@ class CustomItemCategory extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            description,
+                            category. description,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: screenWidth! * 0.05, // حجم خط ديناميكي
@@ -113,7 +94,7 @@ class CustomItemCategory extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.network(
-                      imageUrl,
+                      category.imageUrl,
                       fit: BoxFit.cover,
                       height: 100,
                       width: 50,

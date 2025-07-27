@@ -1,39 +1,9 @@
-import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-class Category {
-  final String name;
-  final String description;
-  final String imageUrl;
-  final int? number;
+import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-  Category({
-    this.number,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'description': description,
-      'imageUrl': imageUrl,
-      'number': number,
-
-    };
-  }
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      name: json['name'],
-      description: json['description'],
-      imageUrl: json['imageUrl'],
-      number: json['number'],
-    );
-  }
-}
+import 'Item.dart';
 
 class ItemProvider with ChangeNotifier {
   List<Category> _favorites = [];
@@ -64,7 +34,7 @@ class ItemProvider with ChangeNotifier {
   Future<void> _saveFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> favoriteList =
-        _favorites.map((category) => jsonEncode(category.toJson())).toList();
+    _favorites.map((category) => jsonEncode(category.toJson())).toList();
     prefs.setStringList('favorites', favoriteList);
   }
 

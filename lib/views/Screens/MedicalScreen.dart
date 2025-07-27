@@ -2,7 +2,7 @@ import 'package:Tourism_app/core/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/Item.dart';
+import '../../models/Item/Item.dart';
 import '../../models/cubit/Bloc.dart';
 import '../../models/cubit/states.dart';
 import '../Wedget/CustomItemCatogry.dart';
@@ -25,7 +25,6 @@ class MedicalScreen extends StatelessWidget {
       backgroundColor: colorV,
       body: Column(
         children: [
-
           Container(
             height: 50,
             decoration: BoxDecoration(color: colorA),
@@ -105,9 +104,7 @@ class MedicalScreen extends StatelessWidget {
                         },
                         child: CustomItemCategory(
                           screenWidth: MediaQuery.of(context).size.width,
-                          name: categories[index].name,
-                          description: categories[index].description,
-                          imageUrl: categories[index].imageUrl,
+                          category: categories[index],
                         ),
                       );
                     },
