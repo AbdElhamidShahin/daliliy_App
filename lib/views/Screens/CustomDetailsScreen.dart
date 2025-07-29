@@ -1,214 +1,301 @@
-import 'dart:io';
-
-import 'package:Tourism_app/core/constants/color.dart';
-import 'package:Tourism_app/models/cubit/Bloc.dart';
-import 'package:Tourism_app/models/cubit/states.dart';
-import 'package:Tourism_app/views/Wedget/CarouseSlider.dart';
-import 'package:Tourism_app/views/Wedget/CustomIconDown.dart';
+import 'package:Tourism_app/models/Item/Item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../core/helpers/StarRating.dart';
-import '../../models/Item/Item.dart';
-import '../Wedget/CustomSohialCatogey.dart';
+import '../../models/cubit/Bloc.dart';
+import '../../models/cubit/states.dart';
 import '../Wedget/IconFavorite.dart';
+import '../Wedget/buildContactCard.dart';
+import '../Wedget/buildCustomBackButton.dart';
+import '../Wedget/buildRatingSection.dart';
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
-  String text = '';
-  CustomDetailsScreen({super.key, required this.category});
+
+  const CustomDetailsScreen({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Container(
-            height: 450,
-            width: double.infinity,
-            child: Image.network(
-              category.imageUrl,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.only(right: 10, left: 10, top: 0),
-            child: Container(
-              height: 120,
-              constraints: const BoxConstraints(
-                minHeight: 120,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(28),
-              ),
-              child: Row(
-                children: [
-                  Iconfavorite(category: category),
+    final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
 
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 12.0),
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              category.name,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 24),
-                            ),
-                          ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              // Header Section
+              SliverAppBar(
+                expandedHeight: size.height * 0.5,
+                collapsedHeight: 100,
+                stretch: true,
+                pinned: true,
+                backgroundColor: Colors.transparent,
+                flexibleSpace: FlexibleSpaceBar(
+                  stretchModes: const [StretchMode.zoomBackground],
+                  background: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Hero(
+                        tag: 'image_${category.id}',
+                        child: Image.network(
+                          category.imageUrl,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              color: Colors.grey[200],
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[200],
+                              child: const Center(
+                                child: Icon(Icons.broken_image,
+                                    size: 50, color: Colors.grey),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    ),
-                  ),
-                  // 1/5 for Image (using FractionallySizedBox to scale image)
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: FractionallySizedBox(
-                        alignment: Alignment.center,
-                        heightFactor: 0.99,
-                        widthFactor:
-                            1.2, // Ensures the image takes the full height
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            category.imageUrl, // Use the passed imageUrl here
-                            fit: BoxFit.cover,
+                      Positioned(
+                        bottom: 40,
+                        left: 0,
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                category.name,
+                                style: const TextStyle(
+                                  fontSize: 32,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  shadows: [
+                                    Shadow(
+                                      blurRadius: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              BlocBuilder<DalilyCubit, DalilyState>(
+                                builder: (context, state) {
+                                  return StarRating(
+                                    rating: DalilyCubit.get(context).rating,
+                                    size: 28,
+                                    color: Colors.amber,
+                                    onRatingChanged: (rating) {
+                                      DalilyCubit.get(context)
+                                          .RatingState(rating);
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  // 1/5 Empty Space (Adjustable if needed)
-                ],
+                ),
               ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 20,
-            ),
-            child: Text(
-              "الوصف",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              category.description,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black54,
-                fontSize: 20,
-              ),
-              // Your other widget content
-            ),
-          ),
-          CustomCarouseSlider(),
-          Container(
-            color: colorD,
-            height: 210,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 30),
-              child: Column(
-                children: [
-                  Text(
-                    'تابعونا علي ',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 18),
-                  Customsohialcatogey(),
-                ],
-              ),
-            ),
-          ),
-          Center(
-            child: BlocBuilder<DalilyCubit, DalilyState>(
-              builder: (BuildContext context, state) {
-                var cubit = DalilyCubit.get(context);
-                return StarRating(
-                  size: 50,
-                  rating: cubit.rating,
-                  onRatingChanged: (newRating) {
-                    cubit.RatingState(newRating); // Update rating
-                  },
-                );
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Container(
-              width: 160,
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32), color: colorA),
-              child: const Center(
-                  child: Text(
-                'تقييم',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24),
-              )),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomIconDown(
-                icon: Icons.location_on,
-                onTap: () {},
-                color: Colors.cyan,
-              ),
-              CustomIconDown(
-                icon: Icons.location_on,
-                color: Colors.grey,
-                onTap: () {
-                  launchWhatsApp(phone: "201205687372");
 
-                },
+              // Content Section
+              SliverToBoxAdapter(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(height: 30),
+                        const Text(
+                          "الوصف",
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          category.description,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            height: 1.8,
+                            color: Colors.black87,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                        const SizedBox(height: 32),
+                        _buildGallerySection(),
+                        const SizedBox(height: 32),
+                        _buildContactSection(),
+                        const SizedBox(height: 32),
+                        buildRatingSection(context),
+                        const SizedBox(height: 60),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              CustomIconDown(
-                icon: Icons.call,
-                color: colorA,
-                onTap: () {
-                  launch('tel://${category.number}');
-                },
-              )
             ],
-          )
-        ]),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 12,
+            right: 12,
+            child: Iconfavorite(),
+          ),
+          // Custom Back Button
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 12,
+            left: 12,
+            child: buildCustomBackButton(context),
+          ),
+        ],
       ),
     );
   }
-}
-void launchWhatsApp({required String phone}) async {
-  final url = "https://wa.me/$phone";
 
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  Widget _buildGallerySection() {
+    if (category.imageUrl == null || category.imageUrl!.isEmpty) {
+      return const SizedBox();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const SizedBox(height: 16),
+        SizedBox(
+          height: 200,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: category.imageUrl!.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.network(
+                    category.imageUrl,
+                    width: 300,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContactSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const Text(
+          "معلومات التواصل",
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 20),
+        GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          childAspectRatio: 1.8,
+          children: [
+            if (category.locationLink != null)
+              buildContactCard(
+                icon: Icons.location_on,
+                label: 'الموقع',
+                color: Colors.blue,
+                onTap: () async {
+                  final url = category.locationLink;
+                  if (url != null && await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(
+                      Uri.parse(url),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              ),
+            if (category.number != null)
+              buildContactCard(
+                icon: Icons.call,
+                label: 'اتصال',
+                color: Colors.green,
+                onTap: () {
+                  launch('tel://${category.number}');
+                },
+              ),
+            if (category.number != null)
+              buildContactCard(
+                icon: FontAwesomeIcons.whatsapp,
+                label: 'واتساب',
+                color: const Color(0xFF25D366),
+                onTap: () {
+                  launch('https://wa.me/${_formatPhone(category.number!)}');
+                },
+              ),
+            if (category.youtypeLink != null)
+              buildContactCard(
+                icon: FontAwesomeIcons.instagram,
+                label: 'انستجرام',
+                color: const Color(0xFFE1306C),
+                onTap: () {
+                  launch(category.youtypeLink);
+                },
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  String _formatPhone(String phone) {
+    if (phone.startsWith('0')) {
+      return '2${phone.substring(1)}';
+    }
+    return phone;
   }
 }

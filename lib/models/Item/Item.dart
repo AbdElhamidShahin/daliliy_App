@@ -14,7 +14,7 @@ class Category {
   final String locationLink;
   final String phoneLink;
   final String location;
-  final int number;
+  final String number;
 
   Category({
     required this.id,

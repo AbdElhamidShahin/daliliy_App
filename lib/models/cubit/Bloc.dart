@@ -198,7 +198,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   final List<Map<String, dynamic>> items2 = [
     {
       'urlImage': 'assets/Catogry2/3967199_2053509.jpg',
-      'name': ' المطاعم ',
+      'name': ' مطاعم ',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -214,7 +214,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry2/22730235_6688503.jpg',
-      'name': 'الكافيهات',
+      'name': 'كافيهات',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -230,7 +230,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry2/3797919_9984.jpg',
-      'name': 'محلات البقاله',
+      'name': 'بقاله',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -246,7 +246,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry2/download.jpeg',
-      'name': 'محلات العطاره',
+      'name': 'عطاره',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -263,7 +263,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     {
       'urlImage':
           'assets/Catogry2/cartoon-color-supermarket-vegetables-and-fruits-vector-30335720.jpg',
-      'name': '  محلات الخضار والفاكه',
+      'name': 'خضار وفاكه',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -279,7 +279,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry2/images (1).jpeg',
-      'name': 'محلات الحلويات والمخابز',
+      'name': 'حلويات ومخابز',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -313,7 +313,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   final List<Map<String, dynamic>> items3 = [
     {
       'urlImage': 'assets/Catogry3/settings.png',
-      'name': 'الاجهزه الالكترونيه',
+      'name': 'اجهزه الكترونيه',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -329,7 +329,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry3/home-appliance.png',
-      'name': 'الأجهزه المنزليه',
+      'name': 'أجهزه منزليه',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -346,7 +346,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     {
       'urlImage':
           'assets/Catogry3/construction-worker-holding-drill-hammer-hand-professional-builder-with-work-tool-character-figure-cartoon-illustration-white-background_201904-310.avif',
-      'name': ' المؤن البويات',
+      'name': ' مؤن و بويات',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
@@ -362,7 +362,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/Catogry3/barbershop.png',
-      'name': 'محلات الحلاقه',
+      'name': 'محلات حلاقه',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,

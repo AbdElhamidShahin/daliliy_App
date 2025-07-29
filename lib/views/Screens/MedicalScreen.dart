@@ -103,7 +103,6 @@ class MedicalScreen extends StatelessWidget {
                           );
                         },
                         child: CustomItemCategory(
-                          screenWidth: MediaQuery.of(context).size.width,
                           category: categories[index],
                         ),
                       );

@@ -1,8 +1,11 @@
 import 'package:Tourism_app/views/Wedget/buildSocialIcon.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/Item/Item.dart';
+
 class Customsohialcatogey extends StatelessWidget {
-  const Customsohialcatogey({super.key});
+  const Customsohialcatogey({super.key, required this.category});
+  final Category category;
 
   @override
   Widget build(BuildContext context) {
@@ -13,26 +16,21 @@ class Customsohialcatogey extends StatelessWidget {
           icon: Icons.facebook,
           color: Colors.blue,
           label: 'FaceBook',
-          url: 'https://www.facebook.com/profile.php?id=100027808480129',
+          url: '${category.facebookLink}',
         ),
         buildSocialIcon(
-          icon: Icons.video_library,
-          color: Colors.red,
+          icon: Icons.phone,
+          color: Colors.green,
           label: 'YouTube',
-          url: 'https://www.youtube.com',
+          url: '${category.whatsAppLink}',
         ),
         buildSocialIcon(
           icon: Icons.camera_alt,
           color: Colors.purple,
           label: 'Instagram',
-          url: 'https://www.instagram.com',
+          url: '${category.youtypeLink}',
         ),
-        buildSocialIcon(
-          icon: Icons.web,
-          color: Colors.green,
-          label: 'Website',
-          url: 'https://www.example.com',
-        ),
+
       ],
     );
   }
