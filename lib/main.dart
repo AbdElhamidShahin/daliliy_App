@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter/services.dart';
 import 'models/Item/ItemProvider.dart';
 import 'models/cubit/Bloc.dart';
 
@@ -29,23 +28,8 @@ void main() async {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    // تخصيص شريط الحالة
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.red, // تغيير لون شريط الحالة
-      statusBarIconBrightness: Brightness.light, // لون الأيقونات في الشريط
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {

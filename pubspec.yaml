@@ -63,6 +63,7 @@ dependencies:
   path_provider: ^2.0.11
   fluttertoast: ^8.1.2
   font_awesome_flutter: ^10.8.0
+  glass_container: ^0.0.4
 
 
 
@@ -94,6 +95,9 @@ flutter:
     - assets/Catogry2/
     - assets/Catogry1/
     - assets/Catogry3/
+    - assets/New folder/
+    - assets/New folder (2)/
+    - assets/New folder (3)/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

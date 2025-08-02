@@ -349,6 +349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.3"
+  glass_container:
+    dependency: "direct main"
+    description:
+      name: glass_container
+      sha256: "740981799d055cc08cab51f75c47b0e348b29416f1f71df6eefb8c6ed1da725e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   google_fonts:
     dependency: "direct main"
     description:

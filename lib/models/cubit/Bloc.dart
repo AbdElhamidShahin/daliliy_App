@@ -22,6 +22,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   ];
 
   void changeBottomNavBar(int index) {
+
     currentIndex = index;
     emit(DalilyBottomnavBarState());
   }
@@ -33,7 +34,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   ];
   final List<Map<String, dynamic>> items = [
     {
-      'urlImage': 'assets/Catogry1/9233795_4116139.jpg',
+      'urlImage': 'assets/New folder/1.png',
       'name': 'الصيداليات',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -42,14 +43,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'الصيداليات',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/rb_51672.png',
+      'urlImage': 'assets/New folder/2.jpg',
       'name': 'المعامل ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -58,14 +62,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'المعامل',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/24237740_6911014.jpg',
+      'urlImage': 'assets/New folder/3.png',
       'name': 'أطفال ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -74,14 +81,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'category'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'أطفال',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/rb_103308.png',
+      'urlImage': 'assets/New folder/4.png',
       'name': 'أسنان ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -90,14 +100,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'أسنان',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/18329494_5964859.jpg',
+      'urlImage': 'assets/New folder/5.png',
       'name': 'عظام ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -106,14 +119,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'عظام',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/26232793_7206784.jpg',
+      'urlImage': 'assets/New folder/6.jpg',
       'name': 'أشعه ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -122,7 +138,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'أشعه',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -130,7 +149,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'assets/Catogry1/flat-style-character-design_839035-1824362.jpg',
+          'assets/New folder/7.jpg',
       'name': 'جلديه ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -139,14 +158,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'جلديه',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/rb_6987.png',
+      'urlImage': 'assets/New folder/8.jpg',
       'name': 'قلب  ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -155,14 +177,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'قلب',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry1/rb_2150836985.png',
+      'urlImage': 'assets/New folder/9.jpg',
       'name': 'سكر ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -171,7 +196,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'سكر',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -179,7 +207,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'assets/Catogry1/caucasian-white-physiotherapist-doctor-checking-260nw-1054540445.webp',
+          'assets/New folder/10.avif',
       'name': 'علاج طبيعي ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -188,7 +216,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'علاج طبيعي ',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -197,7 +228,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   ];
   final List<Map<String, dynamic>> items2 = [
     {
-      'urlImage': 'assets/Catogry2/3967199_2053509.jpg',
+      'urlImage': 'assets/New folder (2)/1.png',
       'name': ' مطاعم ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -206,14 +237,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'مطاعم',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry2/22730235_6688503.jpg',
+      'urlImage': 'assets/New folder (2)/2.png',
       'name': 'كافيهات',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -222,14 +256,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'كافيهات',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry2/3797919_9984.jpg',
+      'urlImage': 'assets/New folder (2)/3.jpg',
       'name': 'بقاله',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -238,14 +275,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'بقاله',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry2/download.jpeg',
+      'urlImage': 'assets/New folder (2)/4.png',
       'name': 'عطاره',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -254,7 +294,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'عطاره',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -262,7 +305,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'assets/Catogry2/cartoon-color-supermarket-vegetables-and-fruits-vector-30335720.jpg',
+          'assets/New folder (2)/5.jpg',
       'name': 'خضار وفاكه',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -271,14 +314,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'خضار وفاكه',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry2/images (1).jpeg',
+      'urlImage': 'assets/New folder (2)/6.jpg',
       'name': 'حلويات ومخابز',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -287,14 +333,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'حلويات ومخابز',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry2/لب-و-سوداني.png',
+      'urlImage': 'assets/New folder (2)/7.jpg',
       'name': 'مقالي وتسالي',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -303,7 +352,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'مقالي وتسالي',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -312,7 +364,7 @@ class DalilyCubit extends Cubit<DalilyState> {
   ];
   final List<Map<String, dynamic>> items3 = [
     {
-      'urlImage': 'assets/Catogry3/settings.png',
+      'urlImage': 'assets/New folder (3)/1.png',
       'name': 'اجهزه الكترونيه',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -321,14 +373,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'اجهزه الكترونيه',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry3/home-appliance.png',
+      'urlImage': 'assets/New folder (3)/2.png',
       'name': 'أجهزه منزليه',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -337,7 +392,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'أجهزه منزليه',
+              ), // اسم الجدول
             ),
           ),
         );
@@ -345,7 +403,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage':
-          'assets/Catogry3/construction-worker-holding-drill-hammer-hand-professional-builder-with-work-tool-character-figure-cartoon-illustration-white-background_201904-310.avif',
+          'assets/New folder (3)/3.jpg',
       'name': ' مؤن و بويات',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -354,14 +412,17 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: ' مؤن و بويات',
+              ), // اسم الجدول
             ),
           ),
         );
       },
     },
     {
-      'urlImage': 'assets/Catogry3/barbershop.png',
+      'urlImage': 'assets/New folder (3)/4.png',
       'name': 'محلات حلاقه',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -370,7 +431,10 @@ class DalilyCubit extends Cubit<DalilyState> {
             builder: (context) => BlocProvider(
               create: (_) =>
                   DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
-              child: const MedicalScreen(tableName: 'test'), // اسم الجدول
+              child: const MedicalScreen(
+                tableName: 'category',
+                screenTitle: 'محلات حلاقه',
+              ), // اسم الجدول
             ),
           ),
         );

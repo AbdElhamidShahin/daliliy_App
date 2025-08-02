@@ -22,10 +22,10 @@ class Iconfavorite extends StatelessWidget {
         bool isFavorite = cubit.isFavorite;
         return Material(
           color: Colors.white.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(100),
           elevation: 2,
           child: InkWell(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(100),
             onTap: () {
               if (category != null) {
                 Provider.of<ItemProvider>(context, listen: false)
@@ -33,19 +33,21 @@ class Iconfavorite extends StatelessWidget {
                 cubit.updateFavoriteState(!isFavorite);
                 print(isFavorite);
               }
-            },      child: Container(
-            width: 48,
-            height: 48,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white.withOpacity(0.3)),
+            },
+            child: Container(
+              width: 48,
+              height: 48,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: Colors.white60),
+              ),
+              child: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                size: 28,
+                color: isFavorite ? Colors.red : Colors.white,
+              ),
             ),
-            child: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              size: 32,
-              color: isFavorite ? Colors.red : Colors.grey,
-            ),      ),
           ),
         );
       },

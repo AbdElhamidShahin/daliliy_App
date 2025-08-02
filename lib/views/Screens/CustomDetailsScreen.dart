@@ -174,17 +174,19 @@ class CustomDetailsScreen extends StatelessWidget {
               ),
             ],
           ),
+
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 8,
+            left: 12,
+            child: Iconfavorite(),
+          ),
           Positioned(
             top: MediaQuery.of(context).padding.top + 12,
             right: 12,
-            child: Iconfavorite(),
-          ),
-          // Custom Back Button
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 12,
-            left: 12,
             child: buildCustomBackButton(context),
           ),
+
+          // Custom Back Button
         ],
       ),
     );
