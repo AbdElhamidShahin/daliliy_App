@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../Color.dart';
 import '../views/Wedget/CarouseSlider.dart';
-import '../views/Wedget/CategoryList.dart';
+import '../views/Wedget/CustomItemCategoryBar.dart';
 import '../views/Wedget/CustomSearchItem.dart';
 import '../views/Wedget/SectionTitle.dart';
 
-class Wedget extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DalilyCubit, DalilyState>(
@@ -27,13 +27,13 @@ class Wedget extends StatelessWidget {
                   const SizedBox(height: 24),
                    CustomCarouselSlider(),
                   const SectionTitle(title: "الخدمات الطبية"),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   CategoryList(items: cubit.items),
                   const SectionTitle(title: "خدمات الطعام والتسوق"),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   CategoryList(items: cubit.items2),
                   const SectionTitle(title: "الخدمات العامة"),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   CategoryList(items: cubit.items3),
                 ],
               ),

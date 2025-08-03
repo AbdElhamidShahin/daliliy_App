@@ -1,9 +1,10 @@
 import 'package:Tourism_app/models/cubit/states.dart';
-import 'package:Tourism_app/viewmodels/%D9%8BWedget.dart';
 import 'package:Tourism_app/views/FavoriteScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../viewmodels/HomePage.dart';
 import '../../views/Screens/MedicalScreen.dart';
 import '../../views/Screens/dataUploadPage.dart';
 import '../Item/Item.dart';
@@ -16,13 +17,12 @@ class DalilyCubit extends Cubit<DalilyState> {
   int currentIndex = 0;
 
   List<Widget> screens = [
-    Wedget(),
+    HomePage(),
     FavoriteScreen(),
     AddCategoryPage(),
   ];
 
   void changeBottomNavBar(int index) {
-
     currentIndex = index;
     emit(DalilyBottomnavBarState());
   }
@@ -42,9 +42,9 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('الصيداليات'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'category',
+                tableName: 'الصيداليات',
                 screenTitle: 'الصيداليات',
               ), // اسم الجدول
             ),
@@ -148,8 +148,7 @@ class DalilyCubit extends Cubit<DalilyState> {
       },
     },
     {
-      'urlImage':
-          'assets/New folder/7.jpg',
+      'urlImage': 'assets/New folder/7.jpg',
       'name': 'جلديه ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -206,8 +205,7 @@ class DalilyCubit extends Cubit<DalilyState> {
       },
     },
     {
-      'urlImage':
-          'assets/New folder/10.avif',
+      'urlImage': 'assets/New folder/10.avif',
       'name': 'علاج طبيعي ',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -304,8 +302,7 @@ class DalilyCubit extends Cubit<DalilyState> {
       },
     },
     {
-      'urlImage':
-          'assets/New folder (2)/5.jpg',
+      'urlImage': 'assets/New folder (2)/5.jpg',
       'name': 'خضار وفاكه',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -402,8 +399,7 @@ class DalilyCubit extends Cubit<DalilyState> {
       },
     },
     {
-      'urlImage':
-          'assets/New folder (3)/3.jpg',
+      'urlImage': 'assets/New folder (3)/3.jpg',
       'name': ' مؤن و بويات',
       'onTap': (BuildContext context) {
         Navigator.push(
@@ -475,15 +471,45 @@ class DalilyCubit extends Cubit<DalilyState> {
       emit(CategoryError(e.toString()));
     }
   }
+  double _currentUserRating = 2.0;
+  List<double> _allRatings = [];
+  bool isFavorite = false;
 
-  double rating = 2;
-  void RatingState(double newRating) {
-    rating = newRating;
+  double get currentRating => _currentUserRating;
 
-    emit(UpdateRatingState(rating));
+  double get averageRating => _allRatings.isNotEmpty
+      ? _allRatings.reduce((a, b) => a + b) / _allRatings.length
+      : 0.0;
+
+  int get ratingCount => _allRatings.length;
+
+  Future<void> updateRating(double newRating) async {
+    _currentUserRating = newRating;
+    _allRatings.add(newRating);
+    await saveRatings();
+    emit(UpdateRatingState(averageRating, ratingCount));
   }
 
-  bool isFavorite = false;
+  Future<void> saveRatings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(
+      'user_ratings',
+      _allRatings.map((r) => r.toString()).toList(),
+    );
+  }
+
+  Future<void> loadInitialData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedRatings = prefs.getStringList('user_ratings') ?? [];
+    _allRatings = savedRatings.map((r) => double.tryParse(r) ?? 0.0).toList();
+    emit(UpdateRatingState(averageRating, ratingCount));
+  }
+
+  void toggleFavorite() {
+    isFavorite = !isFavorite;
+    emit(UpdateFavoriteState(isFavorite));
+  }
+
 
   void updateFavoriteState(bool newState) {
     isFavorite = newState;

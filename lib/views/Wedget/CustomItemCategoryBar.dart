@@ -11,10 +11,14 @@ class CategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 140,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        itemBuilder: (context, index) => CategoryItem(item: items[index]),
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: ListView.builder(
+
+          scrollDirection: Axis.horizontal,
+          itemCount: items.length,
+          itemBuilder: (context, index) => CategoryItem(item: items[index]),
+        ),
       ),
     );
   }

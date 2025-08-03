@@ -17,12 +17,11 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) => ItemProvider()), // FavoriteProvider
+        ChangeNotifierProvider(create: (_) => ItemProvider()),
       ],
       child: BlocProvider<DalilyCubit>(
-        create: (_) => DalilyCubit(),
-        child: MyApp(), // Main app widget
+        create: (_) => DalilyCubit()..loadInitialData(),
+        child: MyApp(),
       ),
     ),
   );

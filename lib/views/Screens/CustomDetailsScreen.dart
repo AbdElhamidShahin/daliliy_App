@@ -2,11 +2,7 @@ import 'package:Tourism_app/models/Item/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/helpers/StarRating.dart';
-import '../../models/cubit/Bloc.dart';
-import '../../models/cubit/states.dart';
 import '../Wedget/IconFavorite.dart';
 import '../Wedget/buildContactCard.dart';
 import '../Wedget/buildCustomBackButton.dart';
@@ -15,11 +11,10 @@ import '../Wedget/buildRatingSection.dart';
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
 
-  const CustomDetailsScreen({super.key, required this.category});
+  const CustomDetailsScreen({super.key, required this.category, context});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -97,19 +92,6 @@ class CustomDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              BlocBuilder<DalilyCubit, DalilyState>(
-                                builder: (context, state) {
-                                  return StarRating(
-                                    rating: DalilyCubit.get(context).rating,
-                                    size: 28,
-                                    color: Colors.amber,
-                                    onRatingChanged: (rating) {
-                                      DalilyCubit.get(context)
-                                          .RatingState(rating);
-                                    },
-                                  );
-                                },
-                              ),
                             ],
                           ),
                         ),
@@ -118,7 +100,6 @@ class CustomDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               // Content Section
               SliverToBoxAdapter(
                 child: Container(

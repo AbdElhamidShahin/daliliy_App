@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:Tourism_app/core/constants/color.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/Item/Item.dart';
+import '../../models/cubit/Bloc.dart';
+import '../../models/cubit/states.dart';
+import 'buildRatingSection.dart';
 
 class CustomItemCategory extends StatelessWidget {
   const CustomItemCategory({
@@ -89,35 +93,7 @@ class CustomItemCategory extends StatelessWidget {
 
                       const SizedBox(height: 8),
 
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.amber.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.star_rounded,
-                              color: Colors.amber[600],
-                              size: 16,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              '4.8',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.amber[700],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ratingWedgit(context),
                     ],
                   ),
                 ),
@@ -132,7 +108,7 @@ class CustomItemCategory extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      width: imageWidth*0.5,
+                      width: imageWidth * 0.5,
                       height: imageWidth * 0.5,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

@@ -8,9 +8,11 @@ class DalilyBottomnavBarState extends DalilyState {}
 
 class UpdateRatingState extends DalilyState {
   final double rating;
+  final int ratingCount;
 
-  UpdateRatingState(this.rating);
+  UpdateRatingState(this.rating, this.ratingCount);
 }
+
 class UpdateFavoriteState extends DalilyState {
   final bool isFavorite;
   UpdateFavoriteState(this.isFavorite);
