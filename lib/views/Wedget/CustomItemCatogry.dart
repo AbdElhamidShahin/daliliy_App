@@ -122,24 +122,14 @@ class CustomItemCategory extends StatelessWidget {
                       ),
                     ),
                     Image.network(
-                      category.imageUrl ?? '',
+                      category.imageUrl,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset('assets/Image/logo.png' ,width: imageWidth,
+                          height: imageWidth * 0.9,);
+                      },
                       width: imageWidth,
                       height: imageWidth * 0.9,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          width: imageWidth,
-                          height: imageWidth * 0.9,
-                          color: Colors.grey[200],
-                          child: Center(
-                            child: Icon(
-                              Icons.image_search,
-                              color: Colors.grey[400],
-                              size: 40,
-                            ),
-                          ),
-                        );
-                      },
                     ),
                   ],
                 ),

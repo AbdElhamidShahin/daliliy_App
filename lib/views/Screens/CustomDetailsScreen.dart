@@ -41,31 +41,11 @@ class CustomDetailsScreen extends StatelessWidget {
                         tag: 'image_${category.id}',
                         child: Image.network(
                           category.imageUrl,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Container(
-                              color: Colors.grey[200],
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes!
-                                      : null,
-                                ),
-                              ),
-                            );
-                          },
                           errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey[200],
-                              child: const Center(
-                                child: Icon(Icons.broken_image,
-                                    size: 50, color: Colors.grey),
-                              ),
-                            );
+                            return Image.asset('assets/Image/logo.png');
                           },
+                          fit: BoxFit.cover,
+
                         ),
                       ),
                       Positioned(
@@ -81,11 +61,11 @@ class CustomDetailsScreen extends StatelessWidget {
                                 category.name,
                                 style: const TextStyle(
                                   fontSize: 32,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   shadows: [
                                     Shadow(
-                                      blurRadius: 10,
+                                      blurRadius: 2,
                                       color: Colors.black,
                                     ),
                                   ],
@@ -193,7 +173,10 @@ class CustomDetailsScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.network(
-                    category.imageUrl,
+                    category.imageUrl ?? 'assets/Image/logo.png',
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/Image/logo.png');
+                    },
                     width: 300,
                     fit: BoxFit.cover,
                   ),
