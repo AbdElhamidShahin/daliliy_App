@@ -1,9 +1,11 @@
 import 'dart:io';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../Wedget/category_dropdown.dart';
+import '../Wedget/image_picker_widget.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({super.key});
@@ -29,7 +31,18 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   bool isUploading = false;
   String? selectedValue;
 
-  // قائمة الفئات - يجب أن تطابق أسماء الجداول في Supabase تماماً
+  final Map<String, String> categoryStorageMap = {
+    'الصيداليات': 'pharmacies',
+    'المعامل': 'pediatrics', // تأكد من وجود جدول labs في قاعدة البيانات
+    'اطفال': 'pediatrics',
+    'اسنان': 'dentists',
+    'عظام': 'orthopedics',
+    'اشعه': 'radiology',
+    'جلديه': 'dermatology',
+    'قلب': 'cardiology',
+    'سكر': 'diabetes',
+    'علاج_طبيعي': 'physiotherapy',
+  };
   final List<String> items = [
     'الصيداليات',
     'المعامل',
@@ -42,10 +55,16 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     'سكر',
     'علاج_طبيعي', // استبدلت المسافة بشرطة سفلية لتجنب المشاكل
   ];
-
   Future<void> _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      final extension = path.extension(pickedFile.path).toLowerCase();
+      if (!['.jpg', '.jpeg', '.png', '.webp'].contains(extension)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('صيغة الملف غير مدعومة')),
+        );
+        return;
+      }
       setState(() {
         _imageFile = File(pickedFile.path);
       });
@@ -53,8 +72,9 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   }
 
   Future<void> _uploadCategory(String category) async {
-    // التحقق من البيانات المطلوبة
-    if (nameController.text.isEmpty || _imageFile == null || selectedValue == null) {
+    if (nameController.text.isEmpty ||
+        _imageFile == null ||
+        selectedValue == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('الاسم، الصورة والفئة مطلوبان')),
       );
@@ -64,49 +84,61 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     setState(() => isUploading = true);
 
     try {
-      // 1. رفع الصورة إلى Storage
-      final fileName = '${DateTime.now().toIso8601String()}${path.extension(_imageFile!.path)}';
-      final uploadResponse = await Supabase.instance.client.storage
-          .from('category') // يمكنك استخدام bucket واحد لجميع الصور
-          .upload('$category/$fileName', _imageFile!);
-
-      if (uploadResponse != null) {
-        throw uploadResponse!;
+      // التحقق من ملف الصورة
+      if (!await _imageFile!.exists()) {
+        throw Exception('ملف الصورة غير موجود');
       }
 
-      // 2. الحصول على رابط الصورة
+      // إنشاء اسم ملف فريد
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final extension = path.extension(_imageFile!.path).toLowerCase();
+      final fileName = 'img_$timestamp${[
+        '.jpg',
+        '.jpeg',
+        '.png',
+        '.webp'
+      ].contains(extension) ? extension : '.jpg'}';
+
+      // تحديد اسم مجلد التخزين حسب الفئة
+      final tableName = categoryStorageMap[selectedValue];
+      if (tableName == null) {
+        throw Exception('الفئة المحددة غير موجودة في الخريطة');
+      }
+
+      // رفع الصورة إلى التخزين
+      final storagePath = '$tableName/$fileName';
+      await Supabase.instance.client.storage
+          .from('category')
+          .upload(storagePath, _imageFile!);
+
+      // الحصول على رابط الصورة
       final imageUrl = Supabase.instance.client.storage
           .from('category')
-          .getPublicUrl('$category/$fileName');
+          .getPublicUrl(storagePath);
 
-      // 3. إدراج البيانات في الجدول المناسب
-      final response = await Supabase.instance.client.from(category).insert({
-        'name': nameController.text,
-        'description': descriptionController.text,
-        'image_url': imageUrl,
-        'facebook_link': facebookLinkController.text,
-        'youtube_link': youtubeLinkController.text,
-        'whatsapp_link': whatsappLinkController.text,
-        'location_link': locationLinkController.text,
-        'phone': phoneLinkController.text,
-        'location': locationController.text,
-        'number': numberController.text,
-        'created_at': DateTime.now().toIso8601String(),
+      // إدخال البيانات في جدول Supabase
+      final response = await Supabase.instance.client.from(tableName).insert({
+        'name': nameController.text.trim(),
+        'description': descriptionController.text.trim(),
+        'facebookLink': facebookLinkController.text.trim(),
+        'youtypeLink': youtubeLinkController.text.trim(),
+        'whatsAppLink': whatsappLinkController.text.trim(),
+        'locationLink': locationLinkController.text.trim(),
+        'phoneLink': phoneLinkController.text.trim(),
+        'location': locationController.text.trim(),
+        'number': numberController.text.trim(),
+        'imageUrl': imageUrl,
       });
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('تمت الإضافة بنجاح')),
+      );
       if (response.error != null) {
-        throw response.error!;
+        throw Exception('فشل في الإضافة: ${response.error!.message}');
       }
 
-      // إظهار رسالة نجاح
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تمت الإضافة بنجاح!')),
-      );
-
-      // مسح الحقول بعد الإضافة
       _clearFields();
-
     } catch (e) {
+      debugPrint('Error details: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('حدث خطأ: ${e.toString()}')),
       );
@@ -140,16 +172,21 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Dropdown for category selection
-            _buildCategoryDropdown(),
+            CategoryDropdown(
+              items: items,
+              selectedValue: selectedValue,
+              onChanged: (value) => setState(() => selectedValue = value),
+            ),
             const SizedBox(height: 16),
+            ImagePickerWidget(
+              imageFile: _imageFile,
+              onTap: _pickImage,
+            ),
 
-            // Image picker
-            _buildImagePicker(),
             const SizedBox(height: 16),
 
             // Text fields
-            _buildTextField(nameController, 'الاسم', isRequired: true),
+            _buildTextField(nameController, 'الاسم'),
             _buildTextField(descriptionController, 'الوصف'),
             _buildTextField(facebookLinkController, 'رابط فيسبوك'),
             _buildTextField(youtubeLinkController, 'رابط يوتيوب'),
@@ -157,7 +194,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             _buildTextField(locationLinkController, 'رابط الموقع'),
             _buildTextField(phoneLinkController, 'رقم الهاتف'),
             _buildTextField(locationController, 'العنوان'),
-            _buildTextField(numberController, 'الرقم التعريفي'),
             const SizedBox(height: 20),
 
             // Submit button
@@ -168,115 +204,8 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     );
   }
 
-  Widget _buildCategoryDropdown() {
-    return DropdownButtonHideUnderline(
-      child: DropdownButton2<String>(
-        isExpanded: true,
-        hint: const Row(
-          children: [
-            Icon(Icons.list, size: 16, color: Colors.yellow),
-            SizedBox(width: 4),
-            Expanded(
-              child: Text(
-                'اختر الفئة',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.yellow,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-        items: items
-            .map((String item) => DropdownMenuItem<String>(
-          value: item,
-          child: Text(
-            item,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ))
-            .toList(),
-        value: selectedValue,
-        onChanged: (String? value) {
-          setState(() {
-            selectedValue = value;
-          });
-        },
-        buttonStyleData: ButtonStyleData(
-          height: 50,
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.black26),
-            color: Colors.redAccent,
-          ),
-          elevation: 2,
-        ),
-        iconStyleData: const IconStyleData(
-          icon: Icon(Icons.arrow_forward_ios_outlined),
-          iconSize: 14,
-          iconEnabledColor: Colors.yellow,
-          iconDisabledColor: Colors.grey,
-        ),
-        dropdownStyleData: DropdownStyleData(
-          maxHeight: 200,
-          width: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: Colors.redAccent,
-          ),
-          offset: const Offset(-20, 0),
-          scrollbarTheme: ScrollbarThemeData(
-            radius: const Radius.circular(40),
-            thickness: MaterialStateProperty.all<double>(6),
-            thumbVisibility: MaterialStateProperty.all<bool>(true),
-          ),
-        ),
-        menuItemStyleData: const MenuItemStyleData(
-          height: 40,
-          padding: EdgeInsets.only(left: 14, right: 14),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildImagePicker() {
-    return GestureDetector(
-      onTap: _pickImage,
-      child: Container(
-        height: 150,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[300],
-          border: Border.all(color: Colors.grey),
-        ),
-        child: _imageFile != null
-            ? ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.file(_imageFile!, fit: BoxFit.cover),
-        )
-            : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.image, size: 50, color: Colors.grey),
-            SizedBox(height: 8),
-            Text('اضغط لإضافة صورة'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(TextEditingController controller, String label, {bool isRequired = false}) {
+  Widget _buildTextField(TextEditingController controller, String label,
+      {bool isRequired = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: TextField(
@@ -300,20 +229,20 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         onPressed: isUploading
             ? null
             : () {
-          if (selectedValue != null) {
-            _uploadCategory(selectedValue!);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('من فضلك اختر فئة أولاً')),
-            );
-          }
-        },
+                if (selectedValue != null) {
+                  _uploadCategory(selectedValue!);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('من فضلك اختر فئة أولاً')),
+                  );
+                }
+              },
         child: isUploading
             ? const CircularProgressIndicator(color: Colors.white)
             : const Text(
-          'إضافة الفئة',
-          style: TextStyle(fontSize: 18),
-        ),
+                'إضافة الفئة',
+                style: TextStyle(fontSize: 18),
+              ),
       ),
     );
   }

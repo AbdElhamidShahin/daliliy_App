@@ -124,7 +124,7 @@ class CustomItemCategory extends StatelessWidget {
                     Image.network(
                       category.imageUrl,
                       errorBuilder: (context, error, stackTrace) {
-                        return Image.asset('assets/Image/logo.png' ,width: imageWidth,
+                        return Image.asset('assets/Image/logo.png' ,      width: imageWidth * 0.9,
                           height: imageWidth * 0.9,);
                       },
                       width: imageWidth,

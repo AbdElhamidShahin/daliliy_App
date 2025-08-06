@@ -42,9 +42,9 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('الصيداليات'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('pharmacies'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'الصيداليات',
+                tableName: 'pharmacies',
                 screenTitle: 'الصيداليات',
               ), // اسم الجدول
             ),
@@ -54,16 +54,16 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/New folder/2.jpg',
-      'name': 'المعامل ',
+      'name': 'المعامل',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('المعامل'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'category',
+                tableName: 'المعامل',
                 screenTitle: 'المعامل',
               ), // اسم الجدول
             ),
@@ -73,16 +73,16 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
     {
       'urlImage': 'assets/New folder/3.png',
-      'name': 'أطفال ',
+      'name': 'أطفال',
       'onTap': (BuildContext context) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('category'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('أطفال'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'category',
+                tableName: 'أطفال',
                 screenTitle: 'أطفال',
               ), // اسم الجدول
             ),
