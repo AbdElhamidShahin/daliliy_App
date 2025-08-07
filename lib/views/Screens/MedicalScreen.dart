@@ -5,6 +5,7 @@ import '../../models/Item/Item.dart';
 import '../../models/cubit/Bloc.dart';
 import '../../models/cubit/states.dart';
 import '../Wedget/CustomItemCatogry.dart';
+import '../Wedget/buildErrorWidget.dart';
 import '../Wedget/customAppbarCatogaryItem.dart';
 import 'CustomDetailsScreen.dart';
 
@@ -30,7 +31,6 @@ class MedicalScreen extends StatelessWidget {
         preferredSize:
             const Size.fromHeight(140), // Slightly taller for better spacing
         child: CustomAppbarCatogaryItem(screenTitle, context),
-
       ),
       body: BlocBuilder<DalilyCubit, DalilyState>(
         builder: (context, state) {
@@ -58,7 +58,7 @@ class MedicalScreen extends StatelessWidget {
               },
             );
           } else if (state is CategoryError) {
-            return Center(child: Text('Error: ${state.message}'));
+            return buildErrorWidget('تـأكد من الشبكه وحاول مره اخري');
           } else {
             return const Center(child: Text('No data available'));
           }

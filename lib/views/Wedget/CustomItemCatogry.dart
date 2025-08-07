@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Tourism_app/core/constants/color.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/Item/Item.dart';
-import '../../models/cubit/Bloc.dart';
-import '../../models/cubit/states.dart';
 import 'buildRatingSection.dart';
 
 class CustomItemCategory extends StatelessWidget {
@@ -13,7 +10,6 @@ class CustomItemCategory extends StatelessWidget {
     this.onTap,
     this.imageWidth = 130,
   });
-
   final Category category;
   final VoidCallback? onTap;
   final double imageWidth;
@@ -124,8 +120,11 @@ class CustomItemCategory extends StatelessWidget {
                     Image.network(
                       category.imageUrl,
                       errorBuilder: (context, error, stackTrace) {
-                        return Image.asset('assets/Image/logo.png' ,      width: imageWidth * 0.9,
-                          height: imageWidth * 0.9,);
+                        return Image.asset(
+                          'assets/Image/logo.png',
+                          width: imageWidth * 0.9,
+                          height: imageWidth * 0.9,
+                        );
                       },
                       width: imageWidth,
                       height: imageWidth * 0.9,

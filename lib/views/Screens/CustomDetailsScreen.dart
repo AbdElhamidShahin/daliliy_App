@@ -1,8 +1,9 @@
 import 'package:Tourism_app/models/Item/Item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import '../../models/Item/ItemProvider.dart';
 import '../Wedget/IconFavorite.dart';
 import '../Wedget/buildContactCard.dart';
 import '../Wedget/buildCustomBackButton.dart';
@@ -45,7 +46,6 @@ class CustomDetailsScreen extends StatelessWidget {
                             return Image.asset('assets/Image/logo.png');
                           },
                           fit: BoxFit.cover,
-
                         ),
                       ),
                       Positioned(
@@ -139,7 +139,14 @@ class CustomDetailsScreen extends StatelessWidget {
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             left: 12,
-            child: Iconfavorite(),
+            child: BuildFavoriteIcon(
+              category: category,
+              onPressed: () {
+                print('عنصر محذوف يدويًا');
+                Provider.of<ItemProvider>(context, listen: false)
+                    .addToFavorites(category);
+              },
+            ),
           ),
           Positioned(
             top: MediaQuery.of(context).padding.top + 12,

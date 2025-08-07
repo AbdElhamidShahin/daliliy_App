@@ -2,12 +2,14 @@ import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:Tourism_app/views/FavoriteScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../viewmodels/HomePage.dart';
 import '../../views/Screens/MedicalScreen.dart';
 import '../../views/Screens/dataUploadPage.dart';
 import '../Item/Item.dart';
+import '../Item/ItemProvider.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -505,15 +507,10 @@ class DalilyCubit extends Cubit<DalilyState> {
     emit(UpdateRatingState(averageRating, ratingCount));
   }
 
-  void toggleFavorite() {
-    isFavorite = !isFavorite;
-    emit(UpdateFavoriteState(isFavorite));
-  }
 
 
-  void updateFavoriteState(bool newState) {
-    isFavorite = newState;
-    emit(UpdateFavoriteState(isFavorite));
-    print(isFavorite);
-  }
+
+
+
+
 }

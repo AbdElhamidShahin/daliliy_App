@@ -34,8 +34,14 @@ class FavoriteScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Iconfavorite(
+                        BuildFavoriteIcon(
                           category: item,
+                          onPressed: () {
+                            print('عنصر محذوف يدويًا');
+                            Provider.of<ItemProvider>(context, listen: false)
+                                .removeFromFavorites(item);
+
+                          },
                         ),
                         Expanded(
                           flex: 2,
@@ -75,6 +81,9 @@ class FavoriteScreen extends StatelessWidget {
                           flex: 1,
                           child: Image.network(
                             item.imageUrl,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/Image/logo.png');
+                            },
                             fit: BoxFit.cover,
                           ),
                         ),

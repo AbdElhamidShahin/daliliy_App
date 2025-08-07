@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Item.dart';
 
 class ItemProvider with ChangeNotifier {
@@ -34,7 +32,7 @@ class ItemProvider with ChangeNotifier {
   Future<void> _saveFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> favoriteList =
-    _favorites.map((category) => jsonEncode(category.toJson())).toList();
+        _favorites.map((category) => jsonEncode(category.toJson())).toList();
     prefs.setStringList('favorites', favoriteList);
   }
 
