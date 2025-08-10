@@ -440,21 +440,28 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-  Future<void> fetchCategoryData(String tableName) async {
+  Future<void> fetchCategoryData(String tableName, {String? query}) async {
     try {
       emit(CategoryLoadingState());
 
-      final response = await Supabase.instance.client.from(tableName).select(
-          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
+      var request = Supabase.instance.client
+          .from(tableName)
+          .select('id, name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number');
+
+      if (query != null && query.isNotEmpty) {
+        request = request.ilike('name', '%$query%'); // بحث جزئي
+      }
+
+      final response = await request;
 
       if (response.isEmpty) {
-        emit(CategoryError('No data found for table "$tableName".'));
+        emit(CategoryLoaded([]));
         return;
       }
 
       final List<Category> categories = response.map((item) {
         return Category(
-          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
+          id: (item['id'] ?? 1) as int,
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
           imageUrl: item['imageUrl'] ?? '',
@@ -506,11 +513,4 @@ class DalilyCubit extends Cubit<DalilyState> {
     _allRatings = savedRatings.map((r) => double.tryParse(r) ?? 0.0).toList();
     emit(UpdateRatingState(averageRating, ratingCount));
   }
-
-
-
-
-
-
-
 }
