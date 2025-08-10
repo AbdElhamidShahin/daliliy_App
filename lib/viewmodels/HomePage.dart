@@ -23,9 +23,9 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const CustomSearchBar(),
+
                   const SizedBox(height: 24),
-                   CustomCarouselSlider(),
+                  CustomCarouselSlider(),
                   const SectionTitle(title: "الخدمات الطبية"),
                   const SizedBox(height: 8),
                   CategoryList(items: cubit.items),

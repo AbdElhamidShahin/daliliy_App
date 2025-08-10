@@ -31,6 +31,7 @@ class MedicalScreen extends StatelessWidget {
         preferredSize:
             const Size.fromHeight(140), // Slightly taller for better spacing
         child: CustomAppbarCatogaryItem(screenTitle, context),
+
       ),
       body: BlocBuilder<DalilyCubit, DalilyState>(
         builder: (context, state) {

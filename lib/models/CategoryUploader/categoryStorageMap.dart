@@ -1,0 +1,55 @@
+final Map<String, String> categoryStorageMap = {
+
+
+  "الصيدليات": "Pharmacies",
+  "المعامل": "Laboratories",
+  "أطفال": "Pediatrics",
+  "أسنان": "Dentistry",
+  "عظام": "Orthopedics",
+  "أشعه": "Radiology",
+  "جلديه": "Dermatology",
+  "قلب": "Cardiology",
+  "سكر": "Diabetes",
+  "علاج طبيعي": "Physiotherapy",
+  "مطاعم": "Restaurants",
+  "كافيهات": "Cafes",
+  "بقاله": "Grocery",
+  "عطاره": "Herbal Shop",
+  "خضار وفاكه": "Fruits and Vegetables",
+  "حلويات ومخابز": "Sweets and Bakeries",
+  "مقالي وتسالي": "Fried Food and Snacks",
+  "اجهزه الكترونيه": "Electronics",
+  "أجهزه منزليه": "Home Appliances",
+  "مؤن و بويات": "Supplies and Paints",
+  "محلات حلاقه": "Barbershops",
+};
+
+final Map<String, List<String>> items = {
+  "الخدمات الطبية": [
+    "الصيدليات",
+    "المعامل",
+    "أطفال",
+    "أسنان",
+    "عظام",
+    "أشعه",
+    "جلديه",
+    "قلب",
+    "سكر",
+    "علاج طبيعي",
+  ],
+  "خدمات الطعام والتسوق": [
+    "مطاعم",
+    "كافيهات",
+    "بقاله",
+    "عطاره",
+    "خضار وفاكه",
+    "حلويات ومخابز",
+    "مقالي وتسالي",
+  ],
+  "الخدمات العامة": [
+    "اجهزه الكترونيه",
+    "أجهزه منزليه",
+    "مؤن و بويات",
+    "محلات حلاقه",
+  ],
+};

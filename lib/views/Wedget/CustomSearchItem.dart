@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
-
 import '../../Color.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final Function(String) onSearch; // callback function
+  final TextEditingController controller = TextEditingController();
+
+  CustomSearchBar({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,18 @@ class CustomSearchBar extends StatelessWidget {
                 boxShadow: const [BoxShadow(color: AppColors.shadow, spreadRadius: 2, blurRadius: 5)],
               ),
               child: TextField(
+                controller: controller,
+                onChanged: (value) {
+                  onSearch(value); // call search on typing
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'ما الذي تبحث عنه؟',
                   prefixIcon: const Icon(Icons.search, color: AppColors.textSecondary, size: 28),
-                  hintStyle: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600
+                  hintStyle: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
