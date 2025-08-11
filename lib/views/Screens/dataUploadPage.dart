@@ -97,7 +97,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           .getPublicUrl(storagePath);
 
       // إدخال البيانات في جدول Supabase
-      final response = await Supabase.instance.client.from(tableName).insert({
+      await Supabase.instance.client.from(tableName).insert({
         'name': nameController.text.trim(),
         'description': descriptionController.text.trim(),
         'facebookLink': facebookLinkController.text.trim(),
@@ -110,9 +110,6 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         'imageUrl': imageUrl,
       });
 
-      if (response.error != null) {
-        throw Exception('فشل في الإضافة: ${response.error!.message}');
-      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('تمت الإضافة بنجاح')),
@@ -232,18 +229,61 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         ),
         onPressed: isUploading
             ? null
-            : () {
+            : () async {
                 if (selectedSubCategory != null) {
-                  _uploadCategory();
+                  try {
+                    await _uploadCategory();
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Row(
+                          children: [
+                            const Icon(Icons.error_outline,
+                                color: Colors.white, size: 28),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                'فشل في إضافة الفئة، حاول مرة أخرى',
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                        backgroundColor: Colors.red.shade600,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        margin: const EdgeInsets.all(16),
+                        duration: const Duration(seconds: 3),
+                      ),
+                    );
+                  }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('من فضلك اختر فئة أولاً')),
+                    SnackBar(
+                      content: Row(
+                        children: [
+                          const Icon(Icons.warning_amber_rounded,
+                              color: Colors.white, size: 28),
+                          const SizedBox(width: 12),
+                          const Text('من فضلك اختر فئة أولاً'),
+                        ],
+                      ),
+                      backgroundColor: Colors.orange.shade700,
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      margin: const EdgeInsets.all(16),
+                      duration: const Duration(seconds: 2),
+                    ),
                   );
                 }
               },
         child: isUploading
             ? const CircularProgressIndicator(color: Colors.white)
-            : Text(
+            : const Text(
                 'إضافة الفئة',
                 style: TextStyle(
                     fontSize: 24,

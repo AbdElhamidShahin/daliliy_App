@@ -1,15 +1,14 @@
 import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:Tourism_app/views/FavoriteScreen.dart';
+import 'package:Tourism_app/views/Screens/SettingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../viewmodels/HomePage.dart';
 import '../../views/Screens/MedicalScreen.dart';
 import '../../views/Screens/dataUploadPage.dart';
 import '../Item/Item.dart';
-import '../Item/ItemProvider.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -22,6 +21,7 @@ class DalilyCubit extends Cubit<DalilyState> {
     HomePage(),
     FavoriteScreen(),
     AddCategoryPage(),
+    AccountScreen(),
   ];
 
   void changeBottomNavBar(int index) {
@@ -29,12 +29,17 @@ class DalilyCubit extends Cubit<DalilyState> {
     emit(DalilyBottomnavBarState());
   }
 
+
   final List<String> imageUrls = [
     'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
     'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
     'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
   ];
-  final List<Map<String, dynamic>> items = [
+
+  void changeIndex(int index) {
+    currentIndex = index;
+    emit(DalilyChangeIndexState());
+  }  final List<Map<String, dynamic>> items = [
     {
       'urlImage': 'assets/New folder/1.png',
       'name': 'الصيداليات',
@@ -255,9 +260,9 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('Cafes'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'category',
+                tableName: 'Cafes',
                 screenTitle: 'كافيهات',
               ), // اسم الجدول
             ),

@@ -48,20 +48,22 @@ class ImagePickerWidget extends StatelessWidget {
                     ),
                   ),
           ),
-          Positioned(
-            top: -50,
-            left: 0,
-            right: 0,
-            child: CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.blue.withOpacity(0.8),
-              child: Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 38,
+          if (imageFile == null)
+            Positioned(
+              top: -50,
+              left: 0,
+              right: 0,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.blue.withOpacity(0.8),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 38,
+                ),
               ),
             ),
-          ),
+
         ],
       ),
     );

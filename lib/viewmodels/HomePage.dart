@@ -23,7 +23,6 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-
                   const SizedBox(height: 24),
                   CustomCarouselSlider(),
                   const SectionTitle(title: "الخدمات الطبية"),

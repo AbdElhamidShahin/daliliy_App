@@ -37,3 +37,4 @@ class CategoryError extends DalilyState {
 
   CategoryError(this.message);
 }
+class DalilyChangeIndexState extends DalilyState {}

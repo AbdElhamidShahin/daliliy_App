@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomCarouselSlider extends StatelessWidget {
-  int _currentIndex = 0; // بداية من أول صورة
-
   CustomCarouselSlider({super.key});
 
   @override
@@ -26,8 +24,9 @@ class CustomCarouselSlider extends StatelessWidget {
                     builder: (BuildContext context) {
                       return Container(
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(url, fit: BoxFit.cover)),
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(url, fit: BoxFit.cover),
+                        ),
                       );
                     },
                   );
@@ -37,18 +36,20 @@ class CustomCarouselSlider extends StatelessWidget {
                   enlargeCenterPage: true,
                   aspectRatio: 16 / 9,
                   onPageChanged: (index, reason) {
-                    cubit.currentIndex = index; // تحديث المؤشر عند تغيير الصورة
+                    cubit.changeIndex(index); // استدعاء دالة تغيير المؤشر
                   },
                 ),
               ),
-              SizedBox(
-                height: 25,
-              ),
-              CarouselIndicator(
-                count: cubit.imageUrls.length,
-                activeColor: Colors.blue, // اللون للنقاط النشطة
-                color: Colors.grey, // اللون للنقاط الغير نشطة
-                index: _currentIndex, // تم تمرير قيمة الـ currentIndex
+              const SizedBox(height: 25),
+              BlocBuilder<DalilyCubit, DalilyState>(
+                builder: (context, state) {
+                  return CarouselIndicator(
+                    count: cubit.imageUrls.length,
+                    activeColor: Colors.blue,
+                    color: Colors.grey,
+                    index: cubit.currentIndex,
+                  );
+                },
               ),
             ],
           );
