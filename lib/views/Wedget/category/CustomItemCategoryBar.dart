@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../Color.dart';
+import '../../../utils/app_colors.dart';
 
 class CategoryList extends StatelessWidget {
   final List<Map<String, dynamic>> items;

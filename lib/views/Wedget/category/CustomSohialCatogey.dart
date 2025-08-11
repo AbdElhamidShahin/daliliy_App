@@ -1,7 +1,7 @@
-import 'package:Tourism_app/views/Wedget/buildSocialIcon.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/Item/Item.dart';
+import '../../../models/Item/Item.dart';
+import '../contact/buildSocialIcon.dart';
 
 class Customsohialcatogey extends StatelessWidget {
   const Customsohialcatogey({super.key, required this.category});

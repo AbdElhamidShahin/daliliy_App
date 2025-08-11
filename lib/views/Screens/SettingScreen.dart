@@ -1,14 +1,12 @@
 import 'dart:io';
-import 'package:Tourism_app/viewmodels/Login/frontPage.dart';
-import 'package:Tourism_app/views/FavoriteScreen.dart';
+import 'package:Tourism_app/views/Screens/frontPage.dart';
+import 'package:Tourism_app/views/Screens/FavoriteScreen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-import '../../core/constants/color.dart';
-
 import '../../services/LocalStorageAccount.dart.dart';
-import '../../viewmodels/EditAccountScreen.dart';
-import '../Wedget/CustomItemSettings.dart';
+import '../../utils/app_colors.dart';
+import 'EditAccountScreen.dart';
+import '../Wedget/settings/CustomItemSettings.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({

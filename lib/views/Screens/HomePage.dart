@@ -1,12 +1,12 @@
-import 'package:Tourism_app/models/cubit/Bloc.dart';
-import 'package:Tourism_app/models/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Color.dart';
-import '../views/Wedget/CarouseSlider.dart';
-import '../views/Wedget/CustomItemCategoryBar.dart';
-import '../views/Wedget/CustomSearchItem.dart';
-import '../views/Wedget/SectionTitle.dart';
+import '../../utils/app_colors.dart';
+import '../../viewmodels/cubit/Bloc.dart';
+import '../../viewmodels/cubit/states.dart';
+import '../Wedget/carousel/CarouseSlider.dart';
+import '../Wedget/category/CustomItemCategoryBar.dart';
+import '../Wedget/search/CustomSearchItem.dart';
+import '../Wedget/buttons/SectionTitle.dart';
 
 class HomePage extends StatelessWidget {
   @override

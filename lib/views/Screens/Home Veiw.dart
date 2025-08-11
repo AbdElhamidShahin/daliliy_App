@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../models/cubit/Bloc.dart';
-import '../models/cubit/states.dart';
+import '../../viewmodels/cubit/Bloc.dart';
+import '../../viewmodels/cubit/states.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

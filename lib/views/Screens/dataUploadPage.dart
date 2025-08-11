@@ -1,14 +1,12 @@
 import 'dart:io' show File;
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import '../../models/CategoryUploader/categoryStorageMap.dart';
-import '../Wedget/buildTextField.dart';
-import '../Wedget/category_dropdown.dart';
-import '../Wedget/image_picker_widget.dart';
+import '../../core/constants/categoryStorageMap.dart';
+import '../Wedget/contact/buildTextField.dart';
+import '../Wedget/dropdowns/category_dropdown.dart';
+import '../Wedget/image/image_picker_widget.dart';
 
 class AddCategoryPage extends StatefulWidget {
   AddCategoryPage({super.key});

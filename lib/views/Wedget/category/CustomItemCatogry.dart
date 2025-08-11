@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Tourism_app/core/constants/color.dart';
-import '../../models/Item/Item.dart';
-import 'buildRatingSection.dart';
+import '../../../models/Item/Item.dart';
+import '../../../utils/app_colors.dart';
+import '../contact/buildRatingSection.dart';
 
 class CustomItemCategory extends StatelessWidget {
   const CustomItemCategory({

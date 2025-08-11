@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Color.dart' show AppColors;
-import '../../models/cubit/Bloc.dart';
-import '../../models/cubit/states.dart';
-import 'CustomSearchItem.dart';
-import 'buildCustomBackButton.dart';
+import '../../../utils/app_colors.dart';
+import '../../../viewmodels/cubit/Bloc.dart';
+import '../../../viewmodels/cubit/states.dart' show DalilyState, CategoryLoaded;
+import '../contact/buildCustomBackButton.dart';
+import '../search/CustomSearchItem.dart';
 
 class CustomAppbarCatogaryItem extends StatelessWidget {
   final String screenTitle;

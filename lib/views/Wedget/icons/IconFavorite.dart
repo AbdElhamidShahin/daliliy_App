@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/Item/Item.dart';
-import '../../models/Item/ItemProvider.dart';
+import '../../../models/Item/Item.dart';
+import '../../../viewmodels/ItemProvider.dart';
 
 class BuildFavoriteIcon extends StatefulWidget {
   final Category category;

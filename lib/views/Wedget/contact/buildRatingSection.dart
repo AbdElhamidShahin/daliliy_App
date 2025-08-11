@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/helpers/StarRating.dart';
-import '../../models/cubit/Bloc.dart';
-import '../../models/cubit/states.dart';
+import '../../../viewmodels/cubit/Bloc.dart';
+import '../../../viewmodels/cubit/states.dart';
+import '../StarRating.dart';
 
 Widget buildRatingSection(BuildContext context) {
   return Column(

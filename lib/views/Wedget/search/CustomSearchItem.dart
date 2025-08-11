@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Color.dart';
+import '../../../utils/app_colors.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final Function(String) onSearch; // callback function

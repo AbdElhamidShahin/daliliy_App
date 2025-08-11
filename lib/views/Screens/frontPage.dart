@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../core/constants/color.dart';
-import '../../views/Wedget/CustomButton.dart';
-import '../Login/RegisterScreen.dart';
+import '../../utils/app_colors.dart';
+import '../Wedget/buttons/CustomButton.dart';
+import 'RegisterScreen.dart';
 import 'LoginScreen.dart';
 
 class FrontScreen extends StatelessWidget {

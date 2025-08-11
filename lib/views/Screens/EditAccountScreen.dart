@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../core/constants/color.dart';
-import '../services/LocalStorageAccount.dart.dart';
-import '../views/Wedget/CustomButton.dart';
-import '../views/Wedget/Customtextfeild.dart';
+import '../../services/LocalStorageAccount.dart.dart';
+import '../../utils/app_colors.dart';
+import '../Wedget/buttons/CustomButton.dart';
+import '../Wedget/buttons/Customtextfeild.dart';
 
 class EditAccountScreen extends StatefulWidget {
   @override

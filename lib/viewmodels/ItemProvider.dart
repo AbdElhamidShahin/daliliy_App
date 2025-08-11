@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Item.dart';
+import '../models/Item/Item.dart';
 
 class ItemProvider with ChangeNotifier {
   List<Category> _favorites = [];

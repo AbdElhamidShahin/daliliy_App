@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/color.dart';
+import '../../../utils/app_colors.dart';
+
 
 class Customtextfeild extends StatelessWidget {
   Customtextfeild({

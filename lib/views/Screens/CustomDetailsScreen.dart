@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../models/Item/ItemProvider.dart';
-import '../Wedget/IconFavorite.dart';
-import '../Wedget/buildContactCard.dart';
-import '../Wedget/buildCustomBackButton.dart';
-import '../Wedget/buildRatingSection.dart';
+import '../../viewmodels/ItemProvider.dart';
+import '../Wedget/contact/buildCustomBackButton.dart';
+import '../Wedget/contact/buildRatingSection.dart' show buildRatingSection;
+import '../Wedget/icons/IconFavorite.dart';
+import '../Wedget/contact/buildContactCard.dart';
+
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;

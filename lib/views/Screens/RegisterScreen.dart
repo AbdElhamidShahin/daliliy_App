@@ -1,11 +1,11 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../core/constants/color.dart';
-import '../../models/showCustomSnackbar.dart';
+import '../../utils/app_colors.dart' show colorB, colorA;
+import 'showCustomSnackbar.dart';
 import '../../services/LocalStorageAccount.dart.dart';
-import '../../views/Wedget/CustomButton.dart';
-import '../../views/Wedget/Customtextfeild.dart';
+import '../Wedget/buttons/CustomButton.dart';
+import '../Wedget/buttons/Customtextfeild.dart';
 import 'LoginScreen.dart';
 
 class Registerscreen extends StatelessWidget {
