@@ -29,6 +29,7 @@ class ItemProvider with ChangeNotifier {
     notifyListeners();
   }
 
+
   Future<void> _saveFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> favoriteList =

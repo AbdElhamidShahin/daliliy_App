@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 
-Padding CustomItemSetteings(String text, final VoidCallback? onPressed) {
+Padding CustomItemSetteings(
+    String text, final VoidCallback? onPressed, IconData? icon,Color color) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 24),
+    padding: const EdgeInsets.symmetric(horizontal: 12),
     child: Column(
       children: [
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios, size: 28, color:  Colors.black),
+            ),
+            Spacer(),
             TextButton(
               onPressed: onPressed,
               child: Text(
                 text,
-                style: const TextStyle(
+                style:  TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
-                    color: Colors.white),
+                    color:Colors.black),
               ),
             ),
-            Container(
-              height: 24,
-              width: 24,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            Icon(
+              icon,
+              size: 32,
+              color: color,
             ),
           ],
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0),
-          child: Divider(
-            color: Colors.black12,
-          ),
         ),
       ],
     ),

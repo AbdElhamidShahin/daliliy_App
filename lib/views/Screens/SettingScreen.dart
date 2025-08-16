@@ -41,108 +41,127 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: colorA,
-                size: 24,
-              ))
-        ],
-        leading: IconButton(
-            onPressed: () async {
-              final result = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EditAccountScreen()),
-              );
-              if (result == true) {
-                await loadUserData();
-              }
-            },
-            icon: const Icon(
-              Icons.edit_note,
-              color: colorA,
-              size: 32,
-            )),
-        title: const Center(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
-          'حسابي',
-          style: TextStyle(color: colorA, fontWeight: FontWeight.bold),
-        )),
+              'حسابي',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text("${name ?? 'غير محدد'} :الاسم",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: colorA)),
-                      const SizedBox(
-                        height: 6,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.black.withOpacity(0.1)),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: image != null && File(image!).existsSync()
+                            ? Image.file(
+                                File(image!),
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                'https://img.freepik.com/premium-vector/avatar-business-women-vector-illustration-flat-2_764382-57434.jpg',
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
                       ),
-                      Text("${phone ?? 'غير محدد'} :رقم الهاتف",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: colorA)),
-                      const SizedBox(
-                        height: 6,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("${name ?? 'Abdo Shahin'}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.black)),
+                          const SizedBox(
+                            height: 6,
+                          ),
+                          Text("${email ?? 'abdoshahin@gmail.com'}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.black45)),
+                        ],
                       ),
-                      Text("${email ?? 'غير محدد'} :الايميل",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: colorA)),
-                    ],
-                  ),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: IconButton(
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditAccountScreen()),
+                            );
+                            if (result == true) {
+                              await loadUserData();
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.black87,
+                            size: 32,
+                          )),
+                    ),
+                  ],
                 ),
-                Spacer(),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(150),
-                  child: image != null && File(image!).existsSync()
-                      ? Image.file(
-                          File(image!),
-                          width: 160,
-                          height: 160,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.network(
-                          'https://img.freepik.com/premium-vector/avatar-business-women-vector-illustration-flat-2_764382-57434.jpg',
-                          width: 160,
-                          height: 160,
-                          fit: BoxFit.cover,
-                        ),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-              ],
+              ),
             ),
-            CustomItemSetteings('العناوين', () {}),
-            CustomItemSetteings('المفضله', () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FavoriteScreen()),
-              );
-            }),
-            CustomItemSetteings('الاشعارات', () {}),
-            CustomItemSetteings('اللغات', () {}),
-            CustomItemSetteings('تغيير كلمه المرور', () {}),
-            CustomItemSetteings('تسجيل الخروج', () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FrontScreen()),
-              );
-            }),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.black12),
+                child: Column(
+                  children: [
+
+                    CustomItemSetteings('المفضله', () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FavoriteScreen()),
+                      );
+                    }, Icons.favorite, Colors.red),
+                    CustomItemSetteings('الاشعارات', () {},
+                        Icons.notifications, Colors.yellowAccent),
+                    CustomItemSetteings('اللغات', () {},
+                        Icons.language, Colors.blue),
+                    CustomItemSetteings('تغيير كلمه المرور', () {},
+                        Icons.lock_reset,  Colors.blue, // هنا حددت اللون
+                      // لون يتكيف مع السمة
+                    ),
+                    CustomItemSetteings('تسجيل الخروج', () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FrontScreen()),
+                      );
+                    }, Icons.login, Colors.black),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

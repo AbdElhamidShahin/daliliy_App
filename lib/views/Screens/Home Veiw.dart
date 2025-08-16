@@ -45,12 +45,19 @@ class HomeView extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
+        children: [        _buildNavItem(
+          cubit: cubit,
+          index: 3,   icon: Icons.person_outline,
+          activeIcon: Icons.person_rounded,
+
+          label: 'حسابي',
+          theme: theme,
+        ),
           _buildNavItem(
             cubit: cubit,
             index: 2,
-            icon: Icons.person_outline,
-            activeIcon: Icons.person_rounded,
+            icon: Icons.brightness_1_outlined,
+            activeIcon: Icons.brightness_1,
             label: 'حسابي',
             theme: theme,
           ),

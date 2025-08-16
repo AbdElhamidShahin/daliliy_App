@@ -23,7 +23,6 @@ class CategoryList extends StatelessWidget {
     );
   }
 }
-
 class CategoryItem extends StatelessWidget {
   final Map<String, dynamic> item;
   const CategoryItem({super.key, required this.item});
@@ -34,16 +33,23 @@ class CategoryItem extends StatelessWidget {
       onTap: () => item['onTap']?.call(context),
       child: Container(
         width: 100,
-        margin: const EdgeInsets.only(left: 12),
+        margin: const EdgeInsets.only(left: 14),
         child: Column(
           children: [
             Container(
-              width: 80,
-              height: 80,
+              width: 85,
+              height: 85,
               decoration: BoxDecoration(
                 color: AppColors.card,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: const [BoxShadow(color: AppColors.shadow, spreadRadius: 1, blurRadius: 4)],
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 6,
+                    offset: Offset(0, 3),
+                  )
+                ],
                 image: DecorationImage(
                   image: AssetImage(item['urlImage']),
                   fit: BoxFit.contain,
@@ -60,6 +66,7 @@ class CategoryItem extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
               maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

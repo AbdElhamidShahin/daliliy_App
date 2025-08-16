@@ -8,8 +8,6 @@ import '../../../viewmodels/cubit/Bloc.dart';
 import '../../../viewmodels/cubit/states.dart';
 
 class CustomCarouselSlider extends StatelessWidget {
-  CustomCarouselSlider({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -22,36 +20,33 @@ class CustomCarouselSlider extends StatelessWidget {
             children: [
               CarouselSlider(
                 items: cubit.imageUrls.map((url) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(url, fit: BoxFit.cover),
-                        ),
-                      );
-                    },
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: Image.network(
+                      url,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
                   );
                 }).toList(),
                 options: CarouselOptions(
                   autoPlay: true,
                   enlargeCenterPage: true,
                   aspectRatio: 16 / 9,
+                  viewportFraction: 0.9,
                   onPageChanged: (index, reason) {
-                    cubit.changeIndex(index); // استدعاء دالة تغيير المؤشر
+                    cubit.changeIndex(index);
                   },
                 ),
               ),
-              const SizedBox(height: 25),
-              BlocBuilder<DalilyCubit, DalilyState>(
-                builder: (context, state) {
-                  return CarouselIndicator(
-                    count: cubit.imageUrls.length,
-                    activeColor: Colors.blue,
-                    color: Colors.grey,
-                    index: cubit.currentIndex,
-                  );
-                },
+              const SizedBox(height: 15),
+              CarouselIndicator(
+                count: cubit.imageUrls.length,
+                activeColor: Colors.blueAccent,
+                color: Colors.grey.withOpacity(0.5),
+                width: 8,
+                height: 8,
+                index: cubit.currentIndex,
               ),
             ],
           );
