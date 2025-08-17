@@ -42,9 +42,9 @@ class CustomCarouselSlider extends StatelessWidget {
               const SizedBox(height: 15),
               CarouselIndicator(
                 count: cubit.imageUrls.length,
-                activeColor: Colors.blueAccent,
+                activeColor: Colors.blue,
                 color: Colors.grey.withOpacity(0.5),
-                width: 8,
+                width: 16,
                 height: 8,
                 index: cubit.currentIndex,
               ),

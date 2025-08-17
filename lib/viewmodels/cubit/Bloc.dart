@@ -16,19 +16,44 @@ class DalilyCubit extends Cubit<DalilyState> {
   static DalilyCubit get(context) => BlocProvider.of<DalilyCubit>(context);
 
   int currentIndex = 0;
+  late PageController pageController;
 
-  List<Widget> screens = [
-    HomePage(),
-    FavoriteScreen(),
-    AddCategoryPage(),
+  final List<Widget> bottomScreens = [
     AccountScreen(),
+    AddCategoryPage(),
+    FavoriteScreen(),
+    HomePage(),
   ];
+
+  final activeIcons = [
+    'assets/icons/user1.svg',
+    'assets/icons/shopping-bag-svgrepo-com (1).svg',
+    'assets/icons/bookmark1.svg',
+    'assets/icons/home1.svg',
+  ];
+
+  final inactiveIcons = [
+    'assets/icons/user.svg',
+    'assets/icons/shopping-bag-svgrepo-com.svg',
+    'assets/icons/bookmark.svg',
+    'assets/icons/home.svg',
+  ];
+
+  void changeTab(int index) {
+    currentIndex = index;
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+
+    emit(AppChangeTabState());
+  }
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
     emit(DalilyBottomnavBarState());
   }
-
 
   final List<String> imageUrls = [
     'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
@@ -39,7 +64,9 @@ class DalilyCubit extends Cubit<DalilyState> {
   void changeIndex(int index) {
     currentIndex = index;
     emit(DalilyChangeIndexState());
-  }  final List<Map<String, dynamic>> items = [
+  }
+
+  final List<Map<String, dynamic>> items = [
     {
       'urlImage': 'assets/New folder/1.png',
       'name': 'الصيداليات',
@@ -449,9 +476,8 @@ class DalilyCubit extends Cubit<DalilyState> {
     try {
       emit(CategoryLoadingState());
 
-      var request = Supabase.instance.client
-          .from(tableName)
-          .select('id, name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number');
+      var request = Supabase.instance.client.from(tableName).select(
+          'id, name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number');
 
       if (query != null && query.isNotEmpty) {
         request = request.ilike('name', '%$query%'); // بحث جزئي
@@ -485,6 +511,7 @@ class DalilyCubit extends Cubit<DalilyState> {
       emit(CategoryError(e.toString()));
     }
   }
+
   double _currentUserRating = 2.0;
   List<double> _allRatings = [];
   bool isFavorite = false;

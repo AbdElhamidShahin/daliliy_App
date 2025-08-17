@@ -21,14 +21,16 @@ class CustomDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       body: Stack(
         children: [
           CustomScrollView(
+
             physics: const BouncingScrollPhysics(),
             slivers: [
               // Header Section
-              SliverAppBar(
+              SliverAppBar(  automaticallyImplyLeading: false, // ⬅️ تمنع زر الرجوع التلقائي
+
                 expandedHeight: size.height * 0.5,
                 collapsedHeight: 100,
                 stretch: true,

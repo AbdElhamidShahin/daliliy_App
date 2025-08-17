@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:Tourism_app/views/Screens/frontPage.dart';
 import 'package:Tourism_app/views/Screens/FavoriteScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../services/LocalStorageAccount.dart.dart';
-import '../../utils/app_colors.dart';
 import 'EditAccountScreen.dart';
 import '../Wedget/settings/CustomItemSettings.dart';
 
@@ -40,9 +38,9 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               'حسابي',
               style: TextStyle(
@@ -55,13 +53,14 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: Colors.black.withOpacity(0.1)),
+                    color: Colors.black.withOpacity(0.08)),
                 child: Row(
                   children: [
                     Padding(
@@ -129,27 +128,37 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
             ),
             Padding(
+              padding: EdgeInsets.only(   right: 24,left: 24,bottom: 16,),
+              child: Text(
+                'الاعدادات',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: Colors.black12),
+                    color: Colors.black.withOpacity(0.08)),
                 child: Column(
                   children: [
-
                     CustomItemSetteings('المفضله', () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => FavoriteScreen()),
                       );
-                    }, Icons.favorite, Colors.red),
-                    CustomItemSetteings('الاشعارات', () {},
-                        Icons.notifications, Colors.yellowAccent),
-                    CustomItemSetteings('اللغات', () {},
-                        Icons.language, Colors.blue),
-                    CustomItemSetteings('تغيير كلمه المرور', () {},
-                        Icons.lock_reset,  Colors.blue, // هنا حددت اللون
+                    }, Icons.favorite_border_outlined, ),
+                    CustomItemSetteings('الاشعارات', () {}, Icons.notifications_none_outlined,
+                      ),
+                    CustomItemSetteings(
+                        'اللغات', () {}, Icons.language, ),
+                    CustomItemSetteings(
+                      'تغيير كلمه المرور', () {},
+                      Icons.lock_reset,  // هنا حددت اللون
                       // لون يتكيف مع السمة
                     ),
                     CustomItemSetteings('تسجيل الخروج', () {
@@ -157,7 +166,9 @@ class _AccountScreenState extends State<AccountScreen> {
                         context,
                         MaterialPageRoute(builder: (context) => FrontScreen()),
                       );
-                    }, Icons.login, Colors.black),
+                    }, Icons.logout_rounded, ),
+
+                   SizedBox(height: 24,)
                   ],
                 ),
               ),

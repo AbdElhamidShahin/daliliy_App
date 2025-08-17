@@ -53,6 +53,7 @@ class _BuildFavoriteIconState extends State<BuildFavoriteIcon> {
                 child: Icon(
                   isFavorite ? Icons.favorite : Icons.favorite_border,
                   size: 28,
+                  color: isFavorite ? Colors.red : Colors.white,
                 )),
           ),
         ),

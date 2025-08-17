@@ -35,42 +35,40 @@ class MedicalScreen extends StatelessWidget {
           tableName: tableName,
         ),
       ),
-      body: Expanded(
-        child: BlocBuilder<DalilyCubit, DalilyState>(
-          builder: (context, state) {
-            if (state is CategoryLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is CategoryLoaded) {
-              final categories = state.categories;
-              if (categories.isEmpty) {
-                return const Center(child: Text('لا توجد نتائج'));
-              }
-              return ListView.builder(
-                padding: const EdgeInsets.only(top: 8),
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  return CustomItemCategory(
-                    category: categories[index],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CustomDetailsScreen(
-                            category: categories[index],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              );
-            } else if (state is CategoryError) {
-              return buildErrorWidget('تـأكد من الشبكه وحاول مره اخري');
-            } else {
-              return const Center(child: Text('No data available'));
+      body: BlocBuilder<DalilyCubit, DalilyState>(
+        builder: (context, state) {
+          if (state is CategoryLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CategoryLoaded) {
+            final categories = state.categories;
+            if (categories.isEmpty) {
+              return const Center(child: Text('لا توجد نتائج'));
             }
-          },
-        ),
+            return ListView.builder(
+              padding: const EdgeInsets.only(top: 8),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return CustomItemCategory(
+                  category: categories[index],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CustomDetailsScreen(
+                          category: categories[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else if (state is CategoryError) {
+            return buildErrorWidget('تـأكد من الشبكه وحاول مره اخري');
+          } else {
+            return const Center(child: Text('No data available'));
+          }
+        },
       ),
     );
   }

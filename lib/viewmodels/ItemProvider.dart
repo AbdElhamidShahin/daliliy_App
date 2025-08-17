@@ -45,6 +45,8 @@ class ItemProvider with ChangeNotifier {
       _favorites = favoriteList
           .map((item) => Category.fromJson(jsonDecode(item)))
           .toList();
+      notifyListeners(); // 👈 ده اللي ناقص
     }
   }
+
 }

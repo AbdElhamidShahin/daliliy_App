@@ -1,137 +1,111 @@
+import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
+import 'package:Tourism_app/viewmodels/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../viewmodels/cubit/Bloc.dart';
-import '../../viewmodels/cubit/states.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int currentIndex = 3;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: currentIndex);
+  }
+
+  void changeTab(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => DalilyCubit(),
-      child: BlocConsumer<DalilyCubit, DalilyState>(
-        listener: (BuildContext context, state) {},
-        builder: (context, state) {
-          final cubit = DalilyCubit.get(context);
-          final theme = Theme.of(context);
+    return BlocBuilder<DalilyCubit, DalilyState>(
+      builder: (context, state) {
+        final cubit = DalilyCubit.get(context);
+        final screenWidth = MediaQuery.of(context).size.width;
 
-          return Scaffold(
-            body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: _buildElegantBottomNavBar(cubit, theme),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildElegantBottomNavBar(DalilyCubit cubit, ThemeData theme) {
-    return Container(
-      height: 80,
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 2,
-            offset: const Offset(0, -2),
+        return Scaffold(
+          body: PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: cubit.bottomScreens,
           ),
-        ],
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [        _buildNavItem(
-          cubit: cubit,
-          index: 3,   icon: Icons.person_outline,
-          activeIcon: Icons.person_rounded,
+          bottomNavigationBar: SizedBox(
+            height: 80,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    width: screenWidth,
+                    height: 80,
+                    color: Colors.white,
+                  ),
+                ),
+         
 
-          label: 'حسابي',
-          theme: theme,
-        ),
-          _buildNavItem(
-            cubit: cubit,
-            index: 2,
-            icon: Icons.brightness_1_outlined,
-            activeIcon: Icons.brightness_1,
-            label: 'حسابي',
-            theme: theme,
-          ),
-          _buildNavItem(
-            cubit: cubit,
-            index: 1,
-            icon: Icons.favorite_outline,
-            activeIcon: Icons.favorite_rounded,
-            label: 'المفضلة',
-            theme: theme,
-          ),        _buildNavItem(
-            cubit: cubit,
-            index: 0,
-            icon: Icons.home_outlined,
-            activeIcon: Icons.home_rounded,
-            label: 'الرئيسية',
-            theme: theme,
-          ),
+                Positioned.fill(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(cubit.activeIcons.length, (index) {
+                      final isSelected = currentIndex == index;
+                      final iconPath = isSelected
+                          ? cubit.activeIcons[index]
+                          : cubit.inactiveIcons[index];
 
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem({
-    required DalilyCubit cubit,
-    required int index,
-    required IconData icon,
-    required IconData activeIcon,
-    required String label,
-    required ThemeData theme,
-  }) {
-    final isActive = cubit.currentIndex == index;
-    final color = isActive ? theme.primaryColor : theme.unselectedWidgetColor;
-
-    return GestureDetector(
-      onTap: () => cubit.changeBottomNavBar(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (child, animation) => ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
-            child: Icon(
-              isActive ? activeIcon : icon,
-              key: ValueKey(isActive),
-              size: 28,
-              color: color,
+                      return GestureDetector(
+                        onTap: () => changeTab(index),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: ShaderMask(
+                            shaderCallback: (Rect bounds) {
+                              return const LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Colors.black, Colors.black87],
+                                stops: [0.0, 0.8],
+                              ).createShader(bounds);
+                            },
+                            blendMode: BlendMode.srcIn,
+                            child: SvgPicture.asset(
+                              iconPath,
+                              width: 32,
+                              height: 32,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-              color: color,
-            ),
-          ),
-          if (isActive)
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              height: 3,
-              width: 24,
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
+
