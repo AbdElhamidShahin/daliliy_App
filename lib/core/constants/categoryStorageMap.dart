@@ -1,7 +1,7 @@
 final Map<String, String> categoryStorageMap = {
 
 
-  "الصيدليات": "Pharmacies",
+  "الصيدليات": "pharmacies",
   "المعامل": "Laboratories",
   "أطفال": "Pediatrics",
   "أسنان": "Dentistry",

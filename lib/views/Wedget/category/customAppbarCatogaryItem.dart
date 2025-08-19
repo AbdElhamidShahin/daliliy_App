@@ -133,7 +133,7 @@ class CustomAppbarCatogaryItem extends StatelessWidget {
                     onSearch: (query) {
                       context
                           .read<DalilyCubit>()
-                          .fetchCategoryData(tableName, query: query);
+                          .fetchCategoryData(tableName,);
                     },
                   ),
                 ),

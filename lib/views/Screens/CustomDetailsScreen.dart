@@ -1,14 +1,13 @@
-import 'package:Tourism_app/models/Item/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../models/Item/Item.dart';
 import '../../viewmodels/ItemProvider.dart';
 import '../Wedget/contact/buildCustomBackButton.dart';
 import '../Wedget/contact/buildRatingSection.dart' show buildRatingSection;
 import '../Wedget/icons/IconFavorite.dart';
 import '../Wedget/contact/buildContactCard.dart';
-
 
 class CustomDetailsScreen extends StatelessWidget {
   final Category category;
@@ -25,11 +24,11 @@ class CustomDetailsScreen extends StatelessWidget {
       body: Stack(
         children: [
           CustomScrollView(
-
             physics: const BouncingScrollPhysics(),
             slivers: [
               // Header Section
-              SliverAppBar(  automaticallyImplyLeading: false, // ⬅️ تمنع زر الرجوع التلقائي
+              SliverAppBar(
+                automaticallyImplyLeading: false, // ⬅️ تمنع زر الرجوع التلقائي
 
                 expandedHeight: size.height * 0.5,
                 collapsedHeight: 100,
@@ -49,34 +48,6 @@ class CustomDetailsScreen extends StatelessWidget {
                             return Image.asset('assets/Image/logo.png');
                           },
                           fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 40,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                category.name,
-                                style: const TextStyle(
-                                  fontSize: 32,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  shadows: [
-                                    Shadow(
-                                      blurRadius: 2,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                          ),
                         ),
                       ),
                     ],
@@ -105,25 +76,48 @@ class CustomDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const SizedBox(height: 30),
-                        const Text(
-                          "الوصف",
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+                        const SizedBox(height: 12),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              category.name,
+                              style:  TextStyle(
+                                fontSize: 26, // أصغر من 32 عشان يكون أنيق
+                                color: Colors.black.withOpacity(0.75), // أخف من black87
+                                fontWeight: FontWeight.w600, // بدل bold تبقى أخف شوية
+                                shadows:const [
+                                  Shadow(
+                                    blurRadius: 1.5,
+                                    color: Colors.black26, // ظل أخف
+                                  ),
+                                ],
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                            const SizedBox(height: 8),
+                          ],
                         ),
-                        SizedBox(height: 16),
-                        Text(
-                          category.description,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            height: 1.8,
-                            color: Colors.black87,
+                        const SizedBox(height: 12),
+                         Text(
+                          ":الوصف",
+                          style: TextStyle(
+                            fontSize: 24, // بدل 24 تبقى أنعم
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black.withOpacity(.7), // درجة أخف
                           ),
                           textAlign: TextAlign.right,
                         ),
+                        const SizedBox(height: 16),
+                        Text(
+                          category.description,
+                          style:  TextStyle(
+                            fontSize: 20,
+                            color: Colors.black.withOpacity(.7), // نص رمادي أفتح للقراءة
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+
                         const SizedBox(height: 32),
                         _buildGallerySection(),
                         const SizedBox(height: 32),

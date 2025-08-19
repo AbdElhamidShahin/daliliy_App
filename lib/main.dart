@@ -1,6 +1,7 @@
-import 'package:Tourism_app/utils/app_colors.dart';
-import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
-import 'package:Tourism_app/views/Screens/Home%20Veiw.dart';
+import 'package:Dalily_App_Owner/utils/app_colors.dart';
+import 'package:Dalily_App_Owner/viewmodels/cubit/Bloc.dart' show DalilyCubit;
+import 'package:Dalily_App_Owner/views/Screens/Home%20Veiw.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Cairo',
+
         appBarTheme: AppBarTheme(
           color: colorV,
         ),

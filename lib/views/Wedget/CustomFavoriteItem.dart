@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Tourism_app/models/Item/Item.dart'; // ده الصحيح
 
+import '../../models/Item/Item.dart';
 import '../../viewmodels/ItemProvider.dart';
 import '../Screens/CustomDetailsScreen.dart';
 

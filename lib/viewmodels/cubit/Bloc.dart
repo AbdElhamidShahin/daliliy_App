@@ -1,14 +1,14 @@
-import 'package:Tourism_app/viewmodels/cubit/states.dart';
-import 'package:Tourism_app/views/Screens/FavoriteScreen.dart';
-import 'package:Tourism_app/views/Screens/SettingScreen.dart';
+import 'package:Dalily_App_Owner/viewmodels/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../models/Item/Item.dart';
+import '../../views/Screens/FavoriteScreen.dart' show FavoriteScreen;
 import '../../views/Screens/HomePage.dart';
 import '../../views/Screens/MedicalScreen.dart';
-import '../../views/Screens/dataUploadPage.dart';
+import '../../views/Screens/SettingScreen.dart';
+import '../../views/Screens/RequestsPage.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -20,7 +20,7 @@ class DalilyCubit extends Cubit<DalilyState> {
 
   final List<Widget> bottomScreens = [
     AccountScreen(),
-    AddCategoryPage(),
+    RequestsPage(),
     FavoriteScreen(),
     HomePage(),
   ];
@@ -472,27 +472,21 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-  Future<void> fetchCategoryData(String tableName, {String? query}) async {
+  Future<void> fetchCategoryData(String tableName) async {
     try {
       emit(CategoryLoadingState());
 
-      var request = Supabase.instance.client.from(tableName).select(
-          'id, name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number');
-
-      if (query != null && query.isNotEmpty) {
-        request = request.ilike('name', '%$query%'); // بحث جزئي
-      }
-
-      final response = await request;
+      final response = await Supabase.instance.client.from(tableName).select(
+          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
 
       if (response.isEmpty) {
-        emit(CategoryLoaded([]));
+        emit(CategoryError('No data found for table "$tableName".'));
         return;
       }
 
       final List<Category> categories = response.map((item) {
         return Category(
-          id: (item['id'] ?? 1) as int,
+          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
           imageUrl: item['imageUrl'] ?? '',
