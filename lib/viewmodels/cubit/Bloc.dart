@@ -95,9 +95,9 @@ class DalilyCubit extends Cubit<DalilyState> {
           MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (_) =>
-                  DalilyCubit()..fetchCategoryData('المعامل'), // اسم الجدول
+                  DalilyCubit()..fetchCategoryData('test'), // اسم الجدول
               child: const MedicalScreen(
-                tableName: 'المعامل',
+                tableName: 'test',
                 screenTitle: 'المعامل',
               ), // اسم الجدول
             ),
@@ -472,27 +472,21 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-  Future<void> fetchCategoryData(String tableName, {String? query}) async {
+  Future<void> fetchCategoryData(String tableName) async {
     try {
       emit(CategoryLoadingState());
 
-      var request = Supabase.instance.client.from(tableName).select(
-          'id, name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number');
-
-      if (query != null && query.isNotEmpty) {
-        request = request.ilike('name', '%$query%'); // بحث جزئي
-      }
-
-      final response = await request;
+      final response = await Supabase.instance.client.from(tableName).select(
+          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
 
       if (response.isEmpty) {
-        emit(CategoryLoaded([]));
+        emit(CategoryError('No data found for table "$tableName".'));
         return;
       }
 
       final List<Category> categories = response.map((item) {
         return Category(
-          id: (item['id'] ?? 1) as int,
+          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
           imageUrl: item['imageUrl'] ?? '',

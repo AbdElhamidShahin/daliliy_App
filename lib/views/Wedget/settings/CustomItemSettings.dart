@@ -22,9 +22,9 @@ Padding CustomItemSetteings(
               child: Text(
                 text,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Colors.black87),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                    color: Colors.black.withOpacity(.6)),
               ),
             ),
             Container(

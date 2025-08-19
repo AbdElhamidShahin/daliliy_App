@@ -95,7 +95,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
           .getPublicUrl(storagePath);
 
       // إدخال البيانات في جدول Supabase
-      await Supabase.instance.client.from(tableName).insert({
+      await Supabase.instance.client.from("requests").insert({
         'name': nameController.text.trim(),
         'description': descriptionController.text.trim(),
         'facebookLink': facebookLinkController.text.trim(),
@@ -106,6 +106,10 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         'location': locationController.text.trim(),
         'number': numberController.text.trim(),
         'imageUrl': imageUrl,
+        'created_by': 'merchant_123', // أو تحط ID التاجر/الايميل
+        'status': 'pending',
+        'subCategory': selectedSubCategory, // التأكد من أن هذا الحقل مضبوط بشكل صحيح
+
       });
 
 

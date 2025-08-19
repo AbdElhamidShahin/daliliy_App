@@ -60,7 +60,7 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: Colors.black.withOpacity(0.08)),
+                    color: Colors.black.withOpacity(0.06)),
                 child: Row(
                   children: [
                     Padding(
@@ -127,8 +127,12 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(   right: 24,left: 24,bottom: 16,),
+            const Padding(
+              padding: EdgeInsets.only(
+                right: 24,
+                left: 24,
+                bottom: 16,
+              ),
               child: Text(
                 'الاعدادات',
                 style: TextStyle(
@@ -142,33 +146,49 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: Colors.black.withOpacity(0.08)),
+                    color: Colors.black.withOpacity(0.06)),
                 child: Column(
                   children: [
-                    CustomItemSetteings('المفضله', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FavoriteScreen()),
-                      );
-                    }, Icons.favorite_border_outlined, ),
-                    CustomItemSetteings('الاشعارات', () {}, Icons.notifications_none_outlined,
-                      ),
                     CustomItemSetteings(
-                        'اللغات', () {}, Icons.language, ),
+                      'المفضله',
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FavoriteScreen()),
+                        );
+                      },
+                      Icons.favorite_border_outlined,
+                    ),
+                    CustomItemSetteings(
+                      'الاشعارات',
+                      () {},
+                      Icons.notifications_none_outlined,
+                    ),
+                    CustomItemSetteings(
+                      'اللغات',
+                      () {},
+                      Icons.language,
+                    ),
                     CustomItemSetteings(
                       'تغيير كلمه المرور', () {},
-                      Icons.lock_reset,  // هنا حددت اللون
+                      Icons.lock_reset, // هنا حددت اللون
                       // لون يتكيف مع السمة
                     ),
-                    CustomItemSetteings('تسجيل الخروج', () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => FrontScreen()),
-                      );
-                    }, Icons.logout_rounded, ),
-
-                   SizedBox(height: 24,)
+                    CustomItemSetteings(
+                      'تسجيل الخروج',
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FrontScreen()),
+                        );
+                      },
+                      Icons.logout_rounded,
+                    ),
+                    SizedBox(
+                      height: 24,
+                    )
                   ],
                 ),
               ),
