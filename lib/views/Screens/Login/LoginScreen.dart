@@ -1,12 +1,12 @@
-import 'package:Tourism_app/views/Screens/frontPage.dart';
+import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../utils/app_colors.dart';
-import 'showCustomSnackbar.dart';
-import '../Wedget/buttons/CustomButton.dart';
-import '../Wedget/buttons/Customtextfeild.dart';
-import 'HomePage.dart';
+import '../../../utils/app_colors.dart';
+import '../showCustomSnackbar.dart';
+import '../../Wedget/buttons/CustomButton.dart';
+import '../../Wedget/buttons/Customtextfeild.dart';
+import '../HomePage.dart';
 import 'RegisterScreen.dart';
 
 class Loginscreen extends StatelessWidget {

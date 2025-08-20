@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Tourism_app/models/Item/Item.dart'; // ده الصحيح
+import 'package:snackly/snackly.dart';
 
 import '../../viewmodels/ItemProvider.dart';
 import '../Screens/CustomDetailsScreen.dart';
@@ -18,7 +19,7 @@ class Customfavoriteitem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<ItemProvider>(context);
-    return  Container(
+    return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -56,20 +57,12 @@ class Customfavoriteitem extends StatelessWidget {
                   size: 32,
                 ),
                 onPressed: () {
-                  favoriteProvider
-                      .removeFromFavorites(category);
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(
-                    SnackBar(
-                      content: const Text(
-                          "تم الحذف من المفضلة"),
-                      backgroundColor: Colors.redAccent,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(10),
-                      ),
-                    ),
+                  favoriteProvider.removeFromFavorites(category);
+
+                  Snackly.success(
+                    context: context,
+                    title: "تم الحذف من المفضلة",
+                    style: SnackbarStyle.filled,
                   );
                 },
               ),
@@ -77,11 +70,9 @@ class Customfavoriteitem extends StatelessWidget {
               // Item details
               Expanded(
                 child: Padding(
-                  padding:
-                  const EdgeInsets.only(right: 12),
+                  padding: const EdgeInsets.only(right: 12),
                   child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         category.name,
@@ -96,8 +87,7 @@ class Customfavoriteitem extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         category.description.length > 30
-                            ? category.description
-                            .substring(0, 30)
+                            ? category.description.substring(0, 30)
                             : category.description,
                         style: TextStyle(
                           fontSize: 16,
@@ -121,18 +111,17 @@ class Customfavoriteitem extends StatelessWidget {
                     width: 120,
                     height: 120,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) =>
-                        Container(
-                          width: 120,
-                          height: 120,
-                          color: Colors.grey[200],
-                          child: Image.asset(
-                            'assets/Image/logo.png',
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                    errorBuilder: (_, __, ___) => Container(
+                      width: 120,
+                      height: 120,
+                      color: Colors.grey[200],
+                      child: Image.asset(
+                        'assets/Image/logo.png',
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),

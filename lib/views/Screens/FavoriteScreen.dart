@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snackly/snackly.dart';
 import '../../viewmodels/ItemProvider.dart';
 import '../Wedget/CustomFavoriteItem.dart';
 
@@ -79,24 +80,11 @@ class FavoriteScreen extends StatelessWidget {
                           ),
                           onDismissed: (_) {
                             favoriteProvider.removeFromFavorites(item);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: const Row(
-                                  children: [
-                                    Text(""),
-                                    Spacer(),
-                                    Text(
-                                      "تم الحذف من المفضلة",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                backgroundColor: Colors.red[400],
-                                behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
+
+                            Snackly.success(
+                              context: context,
+                              title: "تم الحذف من المفضلة",
+                              style: SnackbarStyle.filled,
                             );
                           },
                           child: Customfavoriteitem(

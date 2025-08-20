@@ -2,6 +2,7 @@ import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
+import 'package:snackly/snackly.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/constants/categoryStorageMap.dart';
 import '../Wedget/contact/buildTextField.dart';
@@ -38,9 +39,12 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     if (pickedFile != null) {
       final extension = path.extension(pickedFile.path).toLowerCase();
       if (!['.jpg', '.jpeg', '.png', '.webp'].contains(extension)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('صيغة الملف غير مدعومة')),
+        Snackly.warning(
+          context: context,
+          title: "صيغة الملف غير مدعومة",
+          style: SnackbarStyle.filled,
         );
+
         return;
       }
       setState(() {
@@ -53,9 +57,12 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
     if (nameController.text.isEmpty ||
         _imageFile == null ||
         selectedSubCategory == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('الاسم، الصورة والفئة مطلوبان')),
+      Snackly.error(
+        context: context,
+        title: "الاسم، الصورة والفئة مطلوبان",
+        style: SnackbarStyle.filled,
       );
+
       return;
     }
 
@@ -108,20 +115,23 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
         'imageUrl': imageUrl,
         'created_by': 'merchant_123', // أو تحط ID التاجر/الايميل
         'status': 'pending',
-        'subCategory': selectedSubCategory, // التأكد من أن هذا الحقل مضبوط بشكل صحيح
-
+        'subCategory':
+            selectedSubCategory, // التأكد من أن هذا الحقل مضبوط بشكل صحيح
       });
-
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تمت الإضافة بنجاح')),
+      Snackly.success(
+        context: context,
+        title: "تمت الإضافة بنجاح",
+        style: SnackbarStyle.filled,
       );
 
       _clearFields();
     } catch (e) {
       debugPrint('Error details: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('حدث خطأ: ${e.toString()}')),
+
+      Snackly.error(
+        context: context,
+        title: "حدث خطأ حاول مره اخري",
+        style: SnackbarStyle.filled,
       );
     } finally {
       setState(() => isUploading = false);
@@ -236,50 +246,17 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                   try {
                     await _uploadCategory();
                   } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Row(
-                          children: [
-                            const Icon(Icons.error_outline,
-                                color: Colors.white, size: 28),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                'فشل في إضافة الفئة، حاول مرة أخرى',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
-                        backgroundColor: Colors.red.shade600,
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        margin: const EdgeInsets.all(16),
-                        duration: const Duration(seconds: 3),
-                      ),
+                    Snackly.error(
+                      context: context,
+                      title: "فشل في إضافة الفئة، حاول مرة أخرى",
+                      style: SnackbarStyle.filled,
                     );
                   }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Row(
-                        children: [
-                          const Icon(Icons.warning_amber_rounded,
-                              color: Colors.white, size: 28),
-                          const SizedBox(width: 12),
-                          const Text('من فضلك اختر فئة أولاً'),
-                        ],
-                      ),
-                      backgroundColor: Colors.orange.shade700,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      margin: const EdgeInsets.all(16),
-                      duration: const Duration(seconds: 2),
-                    ),
+                  Snackly.warning(
+                    context: context,
+                    title: "من فضلك اختر فئة أولاً",
+                    style: SnackbarStyle.filled,
                   );
                 }
               },
