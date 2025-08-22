@@ -42,14 +42,13 @@ class CustomSearchBar extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'ما الذي تبحث عنه؟',
-                    prefixIcon: const Icon(Icons.search,
-                        color: AppColors.textSecondary, size: 28),
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+
                 ),
               ),
             ),

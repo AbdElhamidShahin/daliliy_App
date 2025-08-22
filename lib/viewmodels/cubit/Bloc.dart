@@ -472,21 +472,29 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-  Future<void> fetchCategoryData(String tableName) async {
+  Future<void> fetchCategoryData(String tableName, {String? query}) async {
     try {
       emit(CategoryLoadingState());
 
-      final response = await Supabase.instance.client.from(tableName).select(
-          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
+      var request = Supabase.instance.client.from(tableName).select(
+        'name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number',
+      );
+
+      // فلترة بالـ query لو فيه قيمة
+      if (query != null && query.isNotEmpty) {
+        request = request.ilike('name', '%$query%');
+      }
+
+      final response = await request;
 
       if (response.isEmpty) {
         emit(CategoryError('No data found for table "$tableName".'));
         return;
       }
 
-      final List<Category> categories = response.map((item) {
+      final List<Category> categories = response.map<Category>((item) {
         return Category(
-          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
+          id: 0, // لأنك مش جايب الـ id من الجدول
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
           imageUrl: item['imageUrl'] ?? '',
@@ -501,6 +509,55 @@ class DalilyCubit extends Cubit<DalilyState> {
       }).toList();
 
       emit(CategoryLoaded(categories));
+    } catch (e) {
+      emit(CategoryError(e.toString()));
+    }
+  }
+  Future<void> fetchAllCategoriesData(List<String> tableNames, {String? query}) async {
+    try {
+      emit(CategoryLoadingState());
+
+      List<Category> allCategories = [];
+
+      for (String tableName in tableNames) {
+        var request = Supabase.instance.client.from(tableName).select(
+          'name, description, imageUrl, facebookLink, youtypeLink, whatsAppLink, locationLink, phoneLink, location, number',
+        );
+
+        // فلترة بالـ query لو فيه قيمة
+        if (query != null && query.isNotEmpty) {
+          request = request.ilike('name', '%$query%');
+        }
+
+        final response = await request;
+
+        if (response.isNotEmpty) {
+          final List<Category> categories = response.map<Category>((item) {
+            return Category(
+              id: 0, // مفيش id هنا زي ما قولنا
+              name: item['name'] ?? 'No Name',
+              description: item['description'] ?? 'No Description',
+              imageUrl: item['imageUrl'] ?? '',
+              facebookLink: item['facebookLink'] ?? '',
+              youtypeLink: item['youtypeLink'] ?? '',
+              whatsAppLink: item['whatsAppLink'] ?? '',
+              locationLink: item['locationLink'] ?? '',
+              phoneLink: item['phoneLink'] ?? '',
+              location: item['location'] ?? '',
+              number: item['number'] ?? '',
+            );
+          }).toList();
+
+          allCategories.addAll(categories);
+        }
+      }
+
+      if (allCategories.isEmpty) {
+        emit(CategoryError('No data found in any table.'));
+        return;
+      }
+
+      emit(CategoryLoaded(allCategories));
     } catch (e) {
       emit(CategoryError(e.toString()));
     }
