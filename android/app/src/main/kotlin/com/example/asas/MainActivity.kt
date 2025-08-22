@@ -1,4 +1,4 @@
-package com.example.asas
+package com.dalily.app
 
 import io.flutter.embedding.android.FlutterActivity
 

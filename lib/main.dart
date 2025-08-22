@@ -1,6 +1,7 @@
 import 'package:Tourism_app/utils/app_colors.dart';
 import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
-import 'package:Tourism_app/views/Screens/Home%20Veiw.dart';
+import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'viewmodels/ItemProvider.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: 'https://svguqpavelimqbxmzgpl.supabase.co',
@@ -44,7 +48,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: FrontScreen(),
     );
   }
 }

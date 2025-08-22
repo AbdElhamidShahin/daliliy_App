@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.asas"
+    namespace = "com.dalily.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         // This should be the only place where applicationId is defined
-        applicationId = "com.example.asas"  // Ensure this matches your google-services.json package name
+        applicationId = "com.dalily.app"  // Ensure this matches your google-services.json package name
 
         minSdk 23
         targetSdk = flutter.targetSdkVersion

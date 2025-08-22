@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.asas"> <!-- This should match the google-services.json -->
+    package="com.dalily.app"> <!-- This should match the google-services.json -->
     <application
         android:label="asas"
         android:name="${applicationName}"

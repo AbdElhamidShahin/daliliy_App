@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "253004647318",
-    "project_id": "toursm-app",
-    "storage_bucket": "toursm-app.firebasestorage.app"
+    "project_number": "629904567960",
+    "project_id": "dalily-app-39b2c",
+    "storage_bucket": "dalily-app-39b2c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:253004647318:android:6ca8ee37e26535a468ebb7",
+        "mobilesdk_app_id": "1:629904567960:android:c331f5348bf2354555aaed",
         "android_client_info": {
-          "package_name": "com.example.asas"
+          "package_name": "com.dalily.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAFZK6eTIzKUPxhKgpSg4GLyl0McbHX_bQ"
+          "current_key": "AIzaSyAj22ERCIkZjj3kRHMHC7pBhceQplsOks4"
         }
       ],
       "services": {

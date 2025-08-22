@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:snackly/snackly.dart';
 import '../../services/LocalStorageAccount.dart.dart';
 import '../../utils/app_colors.dart';
 
@@ -27,11 +28,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('حدث خطأ أثناء اختيار الصورة'),
-          backgroundColor: Colors.red,
-        ),
+      Snackly.error(
+        context: context,
+        title: "حدث خطأ أثناء اختيار الصورة",
+        style: SnackbarStyle.filled,
       );
     }
   }
@@ -39,59 +39,57 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8FAFD),
+      backgroundColor: const Color(0xFFF8FAFD),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: const Center(
+          child: Text(
+            "        تعديل الملف الشخصي",
+            style: TextStyle(
+              color: Color(0xFF2D3748),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_forward_ios_rounded, color: colorA),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             children: [
-              // Header with back button and title
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back, color: colorA),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "تعديل الملف الشخصي",
-                        style: TextStyle(
-                          color: Color(0xFF2D3748),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 48), // For balance
-                ],
-              ),
-              SizedBox(height: 32),
-
-              // Profile image section
               Stack(
                 children: [
                   Container(
-                    width: 120,
-                    height: 120,
+                    width: 150,
+                    height: 150,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 4),
-                      boxShadow: [
+                      boxShadow:const [
                         BoxShadow(
                           color: Colors.black12,
                           blurRadius: 12,
@@ -102,10 +100,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     child: ClipOval(
                       child: _imageFile != null
                           ? Image.file(_imageFile!, fit: BoxFit.cover)
-                          : Image.network(
-                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                        fit: BoxFit.cover,
-                      ),
+                          : Image.asset(
+                              "assets/Image/AfatarMan.jpg",
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   Positioned(
@@ -116,7 +114,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       child: Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: colorA,
+                          color: Colors.cyan,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -126,29 +124,31 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             ),
                           ],
                         ),
-                        child: Icon(Icons.camera_alt, color: Colors.white, size: 20),
+                        child:const Icon(Icons.camera_alt,
+                            color: Colors.white, size: 28),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 8),
-              Text(
+             const SizedBox(height: 8),
+              const  Text(
                 "تغيير الصورة",
                 style: TextStyle(
                   color: colorA,
                   fontWeight: FontWeight.w500,
+                  fontSize: 18
                 ),
               ),
-              SizedBox(height: 32),
+              const   SizedBox(height: 32),
 
               // Form section
               Container(
-                padding: EdgeInsets.all(24),
+                padding:const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow:const [
                     BoxShadow(
                       color: Colors.black12,
                       blurRadius: 10,
@@ -166,7 +166,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         icon: Icons.person_outline,
                         validatorMsg: "يرجى إدخال الاسم",
                       ),
-                      SizedBox(height: 20),
+                      const  SizedBox(height: 20),
                       _buildTextField(
                         controller: _emailController,
                         label: "البريد الإلكتروني",
@@ -174,7 +174,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         validatorMsg: "يرجى إدخال البريد الإلكتروني",
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       _buildTextField(
                         controller: _phoneController,
                         label: "رقم الهاتف",
@@ -186,7 +186,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 50),
 
               // Save button
               Container(
@@ -194,16 +194,16 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 height: 56,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
-                  gradient: LinearGradient(
+                  gradient:const LinearGradient(
                     colors: [Color(0xFF4E54C8), Color(0xFF8F94FB)],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF4E54C8).withOpacity(0.4),
+                      color: const Color(0xFF4E54C8).withOpacity(0.4),
                       blurRadius: 10,
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),
@@ -216,20 +216,20 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         email: _emailController.text,
                         imagePath: _imageFile?.path,
                       );
-                      Navigator.pop(context, true);
+                      Navigator.pop  (context, true);
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
+                    shadowColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
                   ),
-                  child: Text(
+                  child:const Text(
                     "حفظ التغييرات",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -253,7 +253,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      validator: (value) => value == null || value.isEmpty ? validatorMsg : null,
+      validator: (value) =>
+          value == null || value.isEmpty ? validatorMsg : null,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(color: Colors.grey[600]),
@@ -271,7 +272,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colorA, width: 1.5),
+          borderSide:const  BorderSide(color: Colors.blue, width: 1.5),
         ),
       ),
     );

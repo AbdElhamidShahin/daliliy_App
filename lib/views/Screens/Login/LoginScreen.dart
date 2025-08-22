@@ -1,175 +1,221 @@
-import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/app_colors.dart';
-import '../showCustomSnackbar.dart';
-import '../../Wedget/buttons/CustomButton.dart';
-import '../../Wedget/buttons/Customtextfeild.dart';
-import '../HomePage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:snackly/snackly.dart';
 import 'RegisterScreen.dart';
+import '../HomePage.dart';
 
-class Loginscreen extends StatelessWidget {
+class Loginscreen extends StatefulWidget {
+  const Loginscreen({super.key});
+
+  @override
+  State<Loginscreen> createState() => _LoginscreenState();
+}
+
+class _LoginscreenState extends State<Loginscreen> {
+  final _formKey = GlobalKey<FormState>();
   String? email, password;
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    const emailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-
-    return Form(
-      key: formKey,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => FrontScreen()),
-                  );
-                },
-                icon: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: colorA,
-                  size: 28,
-                )),
-          ],
-          title: Center(
-              child: Text(
-                '       تسجيل الدخول',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: colorA, fontSize: 24),
-              )),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF5AC8FA), Color(0xFF50E3C2)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
-        body: Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                      height: 250,
-                      width: 250,
-                      image: AssetImage(
-                          'assets/LoginImage/snapedit_1740562356043-removebg-preview.png')),
-                  const SizedBox(height: 20),
-                  Customtextfeild(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      } else if (!RegExp(emailRegex).hasMatch(value)) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
-                    hintText: 'الايميل ',
-                    onChanged: (data) => email = data,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 100),
+                Hero(
+                  tag: "appLogo",
+                  child: Image.asset(
+                    'assets/Image/logoFront.png',
+                    height: 180,
                   ),
-                  Customtextfeild(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the password';
-                      } else if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                    hintText: 'كلمه المرور',
-                    onChanged: (data) {
-                      password = data;
-                    },
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  "تسجيل الدخول",
+                  style: GoogleFonts.cairo(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'هل نسيت كلمه المرور؟',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: colorA,
-                            fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 60),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 55,
-                    child: CustomButton(
-                      color: colorB,
-                      color2: colorA,
-                      text: 'تسجيل الدخول ',
-                      onTap: () async {
-                        if (formKey.currentState!.validate()) {
-                          try {
-                            UserCredential user = await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                email: email!, password: password!);
+                ),
+                const SizedBox(height: 40),
 
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()),
-                            );
+                // ====== Email ======
+                _buildTextField(
+                  hint: "البريد الإلكتروني",
+                  icon: Icons.email_outlined,
+                  onChanged: (v) => email = v,
+                  validator: (v) {
+                    if (v == null || v.isEmpty) {
+                      return "من فضلك أدخل البريد الإلكتروني";
+                    }
+                    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                    if (!emailRegex.hasMatch(v)) {
+                      return "صيغة البريد الإلكتروني غير صحيحة";
+                    }
+                    return null;
+                  },
+                ),
 
-                            showCustomSnackbar(
-                              context,
-                              ContentType.success,
-                              'Login successful',
-                              'Redirecting to HomePage',
-                            );
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'wrong-password') {
-                              // في حال كانت كلمة المرور خاطئة
-                              showCustomSnackbar(context, ContentType.failure,
-                                  'Error', 'wrong password');
-                            } else {
-                              // معالجة باقي الأخطاء
-                              showCustomSnackbar(context, ContentType.warning,
-                                  'Error', 'No account? Sign up now');
-                            }
-                          } catch (ex) {
-                            print(ex);
-                            showCustomSnackbar(context, ContentType.failure,
-                                'خطأ', 'حدث خطأ ما');
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Registerscreen()),
+                const SizedBox(height: 16),
+
+                // ====== Password ======
+                _buildTextField(
+                  hint: "كلمة المرور",
+                  icon: Icons.lock_outline,
+                  onChanged: (v) => password = v,
+                  obscure: true,
+                  validator: (v) {
+                    if (v == null || v.isEmpty) {
+                      return "من فضلك أدخل كلمة المرور";
+                    }
+                    if (v.length < 8) {
+                      return "من فضلك اجعل كلمة المرور تتكون من 8 حروف على الأقل";
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 40),
+
+                // ====== Button ======
+                _buildButton(
+                  text: "تسجيل الدخول",
+                  onTap: () async {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      try {
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: email!,
+                          password: password!,
+                        );
+
+                        Snackly.success(
+                          context: context,
+                          title: "✅ تم التسجيل بنجاح، جاري تحويلك الآن...",
+                        );
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => HomePage()),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        String message = "فشل التسجيل";
+
+                        if (e.code == 'user-not-found') {
+                          Snackly.error(
+                            context: context,
+                            title: "ليس لديك حساب؟ سجل الآن",
                           );
-                        },
-                        child: Text(
-                          'حساب جديد',
-                          style: TextStyle(color: colorA, fontSize: 22),
-                        ),
-                      ),
-                      Text(
-                        'ليس لديك حساب؟',
-                        style: TextStyle(color: colorA, fontSize: 18),
-                      ),
-                    ],
+                        } else if (e.code == 'wrong-password') {
+                          Snackly.error(
+                            context: context,
+                            title: "كلمة المرور غير صحيحة",
+                          );
+                        } else if (e.code == 'invalid-email') {
+                          Snackly.error(
+                            context: context,
+                            title: "من فضلك ادخل بريد صالح",
+                          );
+                        }
+
+                        Snackly.error(
+                          context: context,
+                          title: "ليس لديك حساب سجل الان",
+                        );
+                      }
+
+                    }
+
+                  },
+                ),
+
+                const SizedBox(height: 20),
+
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const Registerscreen()),
+                    );
+                  },
+                  child: Text(
+                    "ليس لديك حساب؟ أنشئ الآن",
+                    style: GoogleFonts.cairo(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
-                  const SizedBox(height: 30),
-                ],
-              ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required String hint,
+    required IconData icon,
+    required ValueChanged<String> onChanged,
+    String? Function(String?)? validator,
+    bool obscure = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: TextFormField(
+        obscureText: obscure,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.white),
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.white70),
+          filled: true,
+          fillColor: Colors.black.withOpacity(0.2),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+        ),
+        onChanged: onChanged,
+        validator: validator,
+      ),
+    );
+  }
+
+  Widget _buildButton({required String text, required VoidCallback onTap}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: SizedBox(
+        width: double.infinity,
+        height: 55,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          onPressed: onTap,
+          child: Text(
+            text,
+            style: GoogleFonts.cairo(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.teal,
             ),
           ),
         ),
