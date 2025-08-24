@@ -38,6 +38,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: const [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),

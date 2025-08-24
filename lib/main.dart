@@ -1,5 +1,6 @@
 import 'package:Tourism_app/utils/app_colors.dart';
 import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
+import 'package:Tourism_app/views/Screens/HomePage.dart';
 import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +42,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Cairo',
 
-        appBarTheme: AppBarTheme(
+        appBarTheme:const AppBarTheme(
           color: colorV,
         ),
         scaffoldBackgroundColor: colorV,
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: FrontScreen(),
+      home: HomePage(),
     );
   }
 }

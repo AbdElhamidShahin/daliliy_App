@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snackly/snackly.dart';
+import '../Home Veiw.dart';
 import 'RegisterScreen.dart';
 import '../HomePage.dart';
 
@@ -109,7 +110,7 @@ class _LoginscreenState extends State<Loginscreen> {
 
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (_) => HomePage()),
+                          MaterialPageRoute(builder: (_) => HomeView()),
                         );
                       } on FirebaseAuthException catch (e) {
                         String message = "فشل التسجيل";

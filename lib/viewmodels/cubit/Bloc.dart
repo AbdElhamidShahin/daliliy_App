@@ -56,10 +56,10 @@ class DalilyCubit extends Cubit<DalilyState> {
   }
 
   final List<String> imageUrls = [
-    'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
-    'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
-    'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg',
-  ];
+    "assets/Image/images.jpg",
+    "assets/Image/3d-illustration-togo-coffee-ads-600nw-1794918400.webp",
+    "assets/Image/medical-healthcare-clinic-banner-square-flyer-social-media-post-template_680306-214.avif",
+ ];
 
   void changeIndex(int index) {
     currentIndex = index;

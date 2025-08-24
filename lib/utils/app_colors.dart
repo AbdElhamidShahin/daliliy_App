@@ -31,17 +31,15 @@ const Color accent = Color(0xFFF5A623); // لون تفاعلي ناعم
 // Optional: Shadow
 const Color shadow = Color(0x1A000000); // ظل خفيف
 
-class AppColors {  static const Color searchBar = Colors.white;
-
-static const Color primary = Color(0xFF4C5CFF); // أزرق بنفسجي هادئ
-static const Color secondary = Color(0xFF6C63FF); // بنفسجي فاتح
-static const Color background = Color(0xFFF7F8FC); // رمادي فاتح مريح
-static const Color card = Colors.white;
-static const Color shadow = Color(0x1A000000); // ظل خفيف
-static const Color textPrimary = Color(0xFF1E1E1E);
-static const Color textSecondary = Color(0xFF6E6E6E);
-static const Color border = Color(0xFFE0E0E0);
-static const Color icon = Color(0xFF616161);
-static const Color accent = Color(0xFF00C897); // لون زر أكشن (أخضر نعناعي)
-static const Color rating = Color(0xFFFFC107); // أصفر للتقييم
+class AppColors {
+  static const Color primary = Color(0xFF6C63FF);
+  static const Color primaryLight = Color(0xFF837BFF);
+  static const Color secondary = Color(0xFF35D0BA);
+  static const Color background = Color(0xFFF8F9FA);
+  static const Color card = Color(0xFFFFFFFF);
+  static const Color textPrimary = Color(0xFF2D3748);
+  static const Color textSecondary = Color(0xFF718096);
+  static const Color border = Color(0xFFE2E8F0);
+  static const Color searchBar = Color(0xFFFFFFFF);
+  static const Color icon = Color(0xFF4A5568);
 }

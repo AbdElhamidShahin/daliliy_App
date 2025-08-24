@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../viewmodels/cubit/Bloc.dart' show DalilyCubit;
 import '../../../viewmodels/cubit/states.dart';
-
+// تحسينات على السلايدر
 class CustomCarouselSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CustomCarouselSlider extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(18),
-                      child: Image.network(
+                      child: Image.asset(
                         url,
                         fit: BoxFit.cover,
                         width: double.infinity,

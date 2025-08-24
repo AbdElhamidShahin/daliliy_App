@@ -5,8 +5,6 @@ import '../../viewmodels/cubit/Bloc.dart';
 import '../../viewmodels/cubit/states.dart';
 import '../Wedget/carousel/CarouseSlider.dart';
 import '../Wedget/category/CustomItemCategoryBar.dart';
-import '../Wedget/buttons/SectionTitle.dart';
-import '../Wedget/search/CustomSearchItem.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,37 +18,42 @@ class HomePage extends StatelessWidget {
           body: SingleChildScrollView(
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 36),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  // شريط البحث المحسن
-                  Container(
-                    height: 54,
-                    margin: const EdgeInsets.only(top: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 6,
-                          offset: const Offset(0, 3),
-                        )
-                      ],
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, right: 24, left: 0),
                     child: Row(
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: const Icon(Icons.notifications_none_rounded,
-                              size: 28, color: AppColors.textPrimary),
+                          icon: Icon(
+                            Icons.notifications_none_rounded,
+                            size: 28,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
                         Expanded(
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Container(
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: AppColors.border.withOpacity(0.5),
+                                width: 1,
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 6,
+                                  offset: Offset(0, 3),
+                                )
+                              ],
+                            ),
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
                               child: TextField(
                                 onChanged: (value) {
                                   context
@@ -83,13 +86,18 @@ class HomePage extends StatelessWidget {
                                 },
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'ما الذي تبحث عنه؟',
+                                  hintText: 'ابحث هنا...',
                                   hintStyle: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w600),
+                                  prefixIcon: Icon(
+                                    Icons.search,
                                     color: Colors.grey,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                    size: 24,
                                   ),
-                                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 12),
                                 ),
                               ),
                             ),
@@ -103,28 +111,23 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // قسم الخدمات الطبية مع تحسينات
-                  SectionTitleWithIcon(
-                      title: "الخدمات الطبية",
-                      icon: Icons.medical_services
-                  ),
+                  const SectionTitleWithIcon(
+                      title: "الخدمات الطبية", icon: Icons.medical_services),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items),
                   const SizedBox(height: 18),
 
                   // قسم خدمات الطعام والتسوق
-                  SectionTitleWithIcon(
-                      title: "خدمات الطعام والتسوق",
-                      icon: Icons.restaurant
-                  ),
+                  const SectionTitleWithIcon(
+                      title: "خدمات الطعام والتسوق", icon: Icons.restaurant),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items2),
                   const SizedBox(height: 18),
 
                   // قسم الخدمات العامة
-                  SectionTitleWithIcon(
+                  const SectionTitleWithIcon(
                       title: "الخدمات العامة",
-                      icon: Icons.miscellaneous_services
-                  ),
+                      icon: Icons.miscellaneous_services),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items3),
 
@@ -135,6 +138,37 @@ class HomePage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+// عنصر جديد لعنوان القسم مع أيقونة
+class SectionTitleWithIcon extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const SectionTitleWithIcon(
+      {super.key, required this.title, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Icon(icon, color: Colors.blue, size: 22),
+        ],
+      ),
     );
   }
 }

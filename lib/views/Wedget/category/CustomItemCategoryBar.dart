@@ -22,7 +22,7 @@ class CategoryList extends StatelessWidget {
       ),
     );
   }
-}
+}// تحسينات على CategoryItem
 class CategoryItem extends StatelessWidget {
   final Map<String, dynamic> item;
   const CategoryItem({super.key, required this.item});
