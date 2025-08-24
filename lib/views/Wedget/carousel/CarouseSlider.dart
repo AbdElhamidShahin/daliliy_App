@@ -52,7 +52,7 @@ class CustomCarouselSlider extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 15),
+               SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: cubit.imageUrls.asMap().entries.map((entry) {
