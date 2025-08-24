@@ -22,7 +22,7 @@ class CustomAppbarCatogaryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient:const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
@@ -126,17 +126,16 @@ class CustomAppbarCatogaryItem extends StatelessWidget {
                   buildCustomBackButton(context),
                 ],
               ),
-
               Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: CustomSearchBar(
-                    onSearch: (query) {
-                      context.read<DalilyCubit>().fetchCategoryData(tableName, query: query);
-
-                    },
-                  ),
+                padding: const EdgeInsets.all(0.0),
+                child: CustomSearchBar(
+                  onSearch: (query) {
+                    context
+                        .read<DalilyCubit>()
+                        .fetchCategoryData(tableName, query: query);
+                  },
                 ),
-
+              ),
             ],
           ),
         ),

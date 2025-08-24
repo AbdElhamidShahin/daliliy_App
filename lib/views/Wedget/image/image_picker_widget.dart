@@ -56,7 +56,7 @@ class ImagePickerWidget extends StatelessWidget {
               child: CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.blue.withOpacity(0.8),
-                child: Icon(
+                child: const Icon(
                   Icons.camera_alt,
                   color: Colors.white,
                   size: 38,

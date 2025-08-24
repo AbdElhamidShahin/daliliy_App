@@ -15,7 +15,7 @@ Widget buildCustomBackButton(BuildContext context) {
           borderRadius: BorderRadius.circular(100),
           border: Border.all(color: Colors.white.withOpacity(0.3)),
         ),
-        child: Center(child: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white)),
+        child:const Center(child:  Icon(Icons.arrow_forward_ios_rounded, color: Colors.white)),
       ),
     ),
   );

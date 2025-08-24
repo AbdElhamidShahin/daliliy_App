@@ -186,7 +186,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       },
                       Icons.logout_rounded,
                     ),
-                    SizedBox(
+                    const   SizedBox(
                       height: 24,
                     )
                   ],

@@ -2,22 +2,34 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/app_colors.dart';
 
-
-class SectionTitle extends StatelessWidget {
+class SectionTitleWithIcon extends StatelessWidget {
   final String title;
-  const SectionTitle({super.key, required this.title});
+  final IconData icon;
+
+  const SectionTitleWithIcon({
+    super.key,
+    required this.title,
+    required this.icon
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: AppColors.textPrimary,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: AppColors.textPrimary,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Icon(icon, color: Colors.blue, size: 22),
+        ],
       ),
     );
   }

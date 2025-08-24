@@ -50,7 +50,7 @@ class CustomItemCategory extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon:const Icon(
                       Icons.arrow_back_ios,
                       size: 28,
                       color: Colors.black,
@@ -68,7 +68,7 @@ class CustomItemCategory extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const    SizedBox(
                             width: 8,
                           ),
                           Flexible(
@@ -94,7 +94,7 @@ class CustomItemCategory extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const  SizedBox(
                 width: 12,
               ),
               ClipRRect(

@@ -1,4 +1,4 @@
-final Map<String, String> categoryStorageMap = {
+ final Map<String, String> categoryStorageMap = {
 
 
   "الصيدليات": "pharmacies",

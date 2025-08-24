@@ -40,18 +40,29 @@ class CategoryItem extends StatelessWidget {
               width: 85,
               height: 85,
               decoration: BoxDecoration(
-                color: AppColors.card,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 1,
                     blurRadius: 6,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   )
                 ],
-                image: DecorationImage(
-                  image: AssetImage(item['urlImage']),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white,
+                    Colors.blue.shade50,
+                  ],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset(
+                  item['urlImage'],
                   fit: BoxFit.contain,
                 ),
               ),

@@ -20,22 +20,25 @@ class HomePage extends StatelessWidget {
           body: SingleChildScrollView(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeOutQuint,
+                  // شريط البحث المحسن
+                  Container(
                     height: 54,
                     margin: const EdgeInsets.only(top: 12),
                     decoration: BoxDecoration(
-                      color: AppColors.searchBar,
-                      borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        color: AppColors.border,
-                        width: 1,
-                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
+                        )
+                      ],
                     ),
                     child: Row(
                       children: [
@@ -82,10 +85,11 @@ class HomePage extends StatelessWidget {
                                   border: InputBorder.none,
                                   hintText: 'ما الذي تبحث عنه؟',
                                   hintStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
+                                    color: Colors.grey,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
                                   ),
+                                  prefixIcon: Icon(Icons.search, color: Colors.grey),
                                 ),
                               ),
                             ),
@@ -97,17 +101,34 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   CustomCarouselSlider(),
                   const SizedBox(height: 20),
-                  const SectionTitle(title: "الخدمات الطبية"),
+
+                  // قسم الخدمات الطبية مع تحسينات
+                  SectionTitleWithIcon(
+                      title: "الخدمات الطبية",
+                      icon: Icons.medical_services
+                  ),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items),
                   const SizedBox(height: 18),
-                  const SectionTitle(title: "خدمات الطعام والتسوق"),
+
+                  // قسم خدمات الطعام والتسوق
+                  SectionTitleWithIcon(
+                      title: "خدمات الطعام والتسوق",
+                      icon: Icons.restaurant
+                  ),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items2),
                   const SizedBox(height: 18),
-                  const SectionTitle(title: "الخدمات العامة"),
+
+                  // قسم الخدمات العامة
+                  SectionTitleWithIcon(
+                      title: "الخدمات العامة",
+                      icon: Icons.miscellaneous_services
+                  ),
                   const SizedBox(height: 10),
                   CategoryList(items: cubit.items3),
+
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

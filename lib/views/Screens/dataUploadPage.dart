@@ -159,7 +159,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Center(
+          title:const Center(
         child: Text(
           'إضافة فئة جديدة',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

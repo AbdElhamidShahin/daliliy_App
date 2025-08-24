@@ -115,8 +115,7 @@ class _LoginscreenState extends State<Loginscreen> {
                         String message = "فشل التسجيل";
 
                         if (e.code == 'user-not-found') {
-                          Snackly.error(
-                            context: context,
+                          Snackly.error(context: context,
                             title: "ليس لديك حساب؟ سجل الآن",
                           );
                         } else if (e.code == 'wrong-password') {

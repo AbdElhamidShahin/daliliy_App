@@ -1,10 +1,9 @@
-
-import 'package:carousel_indicator/carousel_indicator.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// تحسينات على السلايدر
+import 'package:carousel_slider/carousel_slider.dart' show CarouselSlider, CarouselOptions;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../viewmodels/cubit/Bloc.dart';
+import '../../../viewmodels/cubit/Bloc.dart' show DalilyCubit;
 import '../../../viewmodels/cubit/states.dart';
 
 class CustomCarouselSlider extends StatelessWidget {
@@ -20,12 +19,26 @@ class CustomCarouselSlider extends StatelessWidget {
             children: [
               CarouselSlider(
                 items: cubit.imageUrls.map((url) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(18),
-                    child: Image.network(
-                      url,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+                  return Container(
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        )
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.network(
+                        url,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     ),
                   );
                 }).toList(),
@@ -40,13 +53,21 @@ class CustomCarouselSlider extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              CarouselIndicator(
-                count: cubit.imageUrls.length,
-                activeColor: Colors.blue,
-                color: Colors.grey.withOpacity(0.5),
-                width: 16,
-                height: 8,
-                index: cubit.currentIndex,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: cubit.imageUrls.asMap().entries.map((entry) {
+                  return Container(
+                    width: cubit.currentIndex == entry.key ? 20 : 8,
+                    height: 8,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: cubit.currentIndex == entry.key
+                          ? Colors.blue
+                          : Colors.grey.withOpacity(0.5),
+                    ),
+                  );
+                }).toList(),
               ),
             ],
           );

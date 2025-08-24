@@ -43,7 +43,7 @@ class Customtextfeild extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: colorA, width: 2.0),
+                  borderSide:const BorderSide(color: colorA, width: 2.0),
                 ),
                 hintText: hintText,
                 hintStyle: const TextStyle(
