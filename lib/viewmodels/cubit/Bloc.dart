@@ -472,7 +472,8 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-  Future<void> fetchCategoryData(String tableName, {String? query}) async {
+  Future<void> fetchCategoryData(String tableName, {String? query}) async
+  {
     try {
       emit(CategoryLoadingState());
 

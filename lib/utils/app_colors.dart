@@ -43,3 +43,8 @@ class AppColors {
   static const Color searchBar = Color(0xFFFFFFFF);
   static const Color icon = Color(0xFF4A5568);
 }
+Color backgroundColor(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.dark
+      ? const Color(0xFF121B22)
+      : Color(0xFFE0EFEC);
+}

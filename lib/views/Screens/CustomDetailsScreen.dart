@@ -82,11 +82,13 @@ class CustomDetailsScreen extends StatelessWidget {
                           children: [
                             Text(
                               category.name,
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 26, // أصغر من 32 عشان يكون أنيق
-                                color: Colors.black.withOpacity(0.75), // أخف من black87
-                                fontWeight: FontWeight.w600, // بدل bold تبقى أخف شوية
-                                shadows:const [
+                                color: Colors.black
+                                    .withOpacity(0.75), // أخف من black87
+                                fontWeight:
+                                    FontWeight.w600, // بدل bold تبقى أخف شوية
+                                shadows: const [
                                   Shadow(
                                     blurRadius: 1.5,
                                     color: Colors.black26, // ظل أخف
@@ -99,7 +101,7 @@ class CustomDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
-                         Text(
+                        Text(
                           ":الوصف",
                           style: TextStyle(
                             fontSize: 24, // بدل 24 تبقى أنعم
@@ -111,13 +113,13 @@ class CustomDetailsScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Text(
                           category.description,
-                          style:  TextStyle(
+                          style: TextStyle(
                             fontSize: 20,
-                            color: Colors.black.withOpacity(.7), // نص رمادي أفتح للقراءة
+                            color: Colors.black
+                                .withOpacity(.7), // نص رمادي أفتح للقراءة
                           ),
                           textAlign: TextAlign.right,
                         ),
-
                         const SizedBox(height: 32),
                         _buildGallerySection(),
                         const SizedBox(height: 32),
@@ -220,12 +222,10 @@ class CustomDetailsScreen extends StatelessWidget {
                 label: 'الموقع',
                 color: Colors.blue,
                 onTap: () async {
-                  final url = category.locationLink;
-                  if (url != null && await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(
-                      Uri.parse(url),
-                      mode: LaunchMode.externalApplication,
-                    );
+                  final url = Uri.parse(category.locationLink!);
+                  if (!await launchUrl(url,
+                      mode: LaunchMode.externalApplication)) {
+                    throw Exception('Could not launch $url');
                   }
                 },
               ),

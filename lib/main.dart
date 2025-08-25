@@ -1,7 +1,9 @@
+import 'package:Tourism_app/utils/ThemeProvider.dart';
 import 'package:Tourism_app/utils/app_colors.dart';
 import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
-import 'package:Tourism_app/views/Screens/HomePage.dart';
+import 'package:Tourism_app/views/Screens/Home%20Veiw.dart';
 import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +12,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'viewmodels/ItemProvider.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ItemProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
       child: BlocProvider<DalilyCubit>(
         create: (_) => DalilyCubit()..loadInitialData(),
@@ -37,19 +39,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
+      themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      darkTheme: ThemeData(
+        fontFamily: 'Cairo',
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF121B22),
+      ),
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Cairo',
-
-        appBarTheme:const AppBarTheme(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: backgroundColor(context),
+        appBarTheme: const AppBarTheme(
           color: colorV,
         ),
-        scaffoldBackgroundColor: colorV,
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+
+      // ✅ هنا التغيير
+      home: FirebaseAuth.instance.currentUser == null
+          ? const FrontScreen() // لو مفيش مستخدم -> روح لتسجيل الدخول
+          : HomeView(), // لو فيه مستخدم -> روح عالهوم
     );
   }
 }

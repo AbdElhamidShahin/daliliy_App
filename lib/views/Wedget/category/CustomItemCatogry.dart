@@ -75,7 +75,7 @@ class CustomItemCategory extends StatelessWidget {
                             child: Text(
                               category.name ?? "لا يوجد اسم",
                               style: theme.textTheme.titleMedium?.copyWith(
-                                fontSize: 24,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color:
                                     isDarkMode ? Colors.white : Colors.black87,

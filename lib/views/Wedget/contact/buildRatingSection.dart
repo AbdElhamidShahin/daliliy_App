@@ -19,7 +19,7 @@ Widget buildRatingSection(BuildContext context) {
       BlocBuilder<DalilyCubit, DalilyState>(
         builder: (context, state) {
           return StarRating(
-            size: 40,
+            size: 36,
             rating: DalilyCubit.get(context).currentRating,
             onRatingChanged: (rating) {
               DalilyCubit.get(context).updateRating(rating);
@@ -69,7 +69,7 @@ Widget ratingWedgit(BuildContext context ) {
       final avg = cubit.averageRating;
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
         decoration: BoxDecoration(
           color: Colors.amber.withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
@@ -79,7 +79,7 @@ Widget ratingWedgit(BuildContext context ) {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.star_rounded, color: Colors.amber[700], size: 24),
-            const SizedBox(width: 8),
+            const SizedBox(width: 6),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
