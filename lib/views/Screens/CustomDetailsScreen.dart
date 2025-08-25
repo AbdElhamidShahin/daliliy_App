@@ -1,8 +1,8 @@
-import 'package:Tourism_app/models/Item/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../models/Item/Item.dart';
 import '../../viewmodels/ItemProvider.dart';
 import '../Wedget/contact/buildCustomBackButton.dart';
 import '../Wedget/contact/buildRatingSection.dart' show buildRatingSection;
@@ -82,6 +82,7 @@ class CustomDetailsScreen extends StatelessWidget {
                           children: [
                             Text(
                               category.name,
+<<<<<<< HEAD
                               style: TextStyle(
                                 fontSize: 26, // أصغر من 32 عشان يكون أنيق
                                 color: Colors.black
@@ -89,6 +90,13 @@ class CustomDetailsScreen extends StatelessWidget {
                                 fontWeight:
                                     FontWeight.w600, // بدل bold تبقى أخف شوية
                                 shadows: const [
+=======
+                              style:  TextStyle(
+                                fontSize: 26, // أصغر من 32 عشان يكون أنيق
+                                color: Colors.black.withOpacity(0.75), // أخف من black87
+                                fontWeight: FontWeight.w600, // بدل bold تبقى أخف شوية
+                                shadows:const [
+>>>>>>> origin/main
                                   Shadow(
                                     blurRadius: 1.5,
                                     color: Colors.black26, // ظل أخف
@@ -101,12 +109,17 @@ class CustomDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 12),
+<<<<<<< HEAD
                         Text(
+=======
+                         Text(
+>>>>>>> origin/main
                           ":الوصف",
                           style: TextStyle(
                             fontSize: 24, // بدل 24 تبقى أنعم
                             fontWeight: FontWeight.w600,
                             color: Colors.black.withOpacity(.7), // درجة أخف
+<<<<<<< HEAD
                           ),
                           textAlign: TextAlign.right,
                         ),
@@ -117,9 +130,21 @@ class CustomDetailsScreen extends StatelessWidget {
                             fontSize: 20,
                             color: Colors.black
                                 .withOpacity(.7), // نص رمادي أفتح للقراءة
+=======
+>>>>>>> origin/main
                           ),
                           textAlign: TextAlign.right,
                         ),
+                        const SizedBox(height: 16),
+                        Text(
+                          category.description,
+                          style:  TextStyle(
+                            fontSize: 20,
+                            color: Colors.black.withOpacity(.7), // نص رمادي أفتح للقراءة
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+
                         const SizedBox(height: 32),
                         _buildGallerySection(),
                         const SizedBox(height: 32),

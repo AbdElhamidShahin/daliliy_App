@@ -127,6 +127,7 @@ class CustomAppbarCatogaryItem extends StatelessWidget {
                 ],
               ),
               Padding(
+<<<<<<< HEAD
                 padding: const EdgeInsets.all(0.0),
                 child: CustomSearchBar(
                   onSearch: (query) {
@@ -134,6 +135,16 @@ class CustomAppbarCatogaryItem extends StatelessWidget {
                         .read<DalilyCubit>()
                         .fetchCategoryData(tableName, query: query);
                   },
+=======
+                  padding: const EdgeInsets.all(0.0),
+                  child: CustomSearchBar(
+                    onSearch: (query) {
+                      context
+                          .read<DalilyCubit>()
+                          .fetchCategoryData(tableName,);
+                    },
+                  ),
+>>>>>>> origin/main
                 ),
               ),
             ],

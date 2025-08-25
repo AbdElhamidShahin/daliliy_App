@@ -1,8 +1,10 @@
-import 'package:Tourism_app/viewmodels/cubit/Bloc.dart';
-import 'package:Tourism_app/viewmodels/cubit/states.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../viewmodels/cubit/Bloc.dart';
+import '../../viewmodels/cubit/states.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

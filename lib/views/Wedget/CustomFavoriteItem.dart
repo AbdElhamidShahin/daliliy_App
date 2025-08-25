@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'package:Tourism_app/models/Item/Item.dart'; // ده الصحيح
 import 'package:snackly/snackly.dart';
+=======
+>>>>>>> origin/main
 
+import '../../models/Item/Item.dart';
 import '../../viewmodels/ItemProvider.dart';
 import '../Screens/CustomDetailsScreen.dart';
 

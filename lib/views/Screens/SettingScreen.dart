@@ -1,6 +1,9 @@
 import 'dart:io';
+<<<<<<< HEAD
 import 'package:Tourism_app/views/Screens/Login/frontPage.dart';
 import 'package:Tourism_app/views/Screens/FavoriteScreen.dart';
+=======
+>>>>>>> origin/main
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/LocalStorageAccount.dart.dart';
@@ -8,6 +11,8 @@ import '../../utils/ThemeProvider.dart';
 import '../../utils/app_colors.dart';
 import 'EditAccountScreen.dart';
 import '../Wedget/settings/CustomItemSettings.dart';
+import 'FavoriteScreen.dart';
+import 'frontPage.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -69,9 +74,14 @@ class _AccountScreenState extends State<AccountScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(
+<<<<<<< HEAD
                   borderRadius: BorderRadius.circular(24),
                   color: containerColor,
                 ),
+=======
+                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.black.withOpacity(0.06)),
+>>>>>>> origin/main
                 child: Row(
                   children: [
                     Padding(
@@ -142,8 +152,17 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
             ),
+<<<<<<< HEAD
             Padding(
               padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16),
+=======
+            const Padding(
+              padding: EdgeInsets.only(
+                right: 24,
+                left: 24,
+                bottom: 16,
+              ),
+>>>>>>> origin/main
               child: Text(
                 'الاعدادات',
                 style: TextStyle(
@@ -157,13 +176,19 @@ class _AccountScreenState extends State<AccountScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
                 decoration: BoxDecoration(
+<<<<<<< HEAD
                   borderRadius: BorderRadius.circular(24),
                   color: containerColor,
                 ),
+=======
+                    borderRadius: BorderRadius.circular(24),
+                    color: Colors.black.withOpacity(0.06)),
+>>>>>>> origin/main
                 child: Column(
                   children: [
                     CustomItemSetteings(
                       'المفضله',
+<<<<<<< HEAD
                           () {
                         Navigator.push(
                           context,
@@ -247,6 +272,46 @@ class _AccountScreenState extends State<AccountScreen> {
                     //   ),
                     // ),
                     const SizedBox(height: 24),
+=======
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FavoriteScreen()),
+                        );
+                      },
+                      Icons.favorite_border_outlined,
+                    ),
+                    CustomItemSetteings(
+                      'الاشعارات',
+                      () {},
+                      Icons.notifications_none_outlined,
+                    ),
+                    CustomItemSetteings(
+                      'اللغات',
+                      () {},
+                      Icons.language,
+                    ),
+                    CustomItemSetteings(
+                      'تغيير كلمه المرور', () {},
+                      Icons.lock_reset, // هنا حددت اللون
+                      // لون يتكيف مع السمة
+                    ),
+                    CustomItemSetteings(
+                      'تسجيل الخروج',
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FrontScreen()),
+                        );
+                      },
+                      Icons.logout_rounded,
+                    ),
+                    SizedBox(
+                      height: 24,
+                    )
+>>>>>>> origin/main
                   ],
                 ),
               ),
