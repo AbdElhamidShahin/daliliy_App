@@ -1,5 +1,4 @@
 import 'package:Dalily_App_Owner/models/Item/Item.dart';
-import 'package:Dalily_App_Owner/views/Screens/CustomDetailsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

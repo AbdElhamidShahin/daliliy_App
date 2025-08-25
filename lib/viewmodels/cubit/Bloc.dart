@@ -1,14 +1,14 @@
-import 'package:Dalily_App_Owner/viewmodels/cubit/states.dart';
+import 'package:Tourism_app/viewmodels/cubit/states.dart';
+import 'package:Tourism_app/views/Screens/FavoriteScreen.dart';
+import 'package:Tourism_app/views/Screens/SettingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../models/Item/Item.dart';
-import '../../views/Screens/FavoriteScreen.dart' show FavoriteScreen;
 import '../../views/Screens/HomePage.dart';
 import '../../views/Screens/MedicalScreen.dart';
-import '../../views/Screens/SettingScreen.dart';
-import '../../views/Screens/RequestsPage.dart';
+import '../../views/Screens/dataUploadPage.dart';
 
 class DalilyCubit extends Cubit<DalilyState> {
   DalilyCubit() : super(DalilyInitialState());
@@ -20,7 +20,7 @@ class DalilyCubit extends Cubit<DalilyState> {
 
   final List<Widget> bottomScreens = [
     AccountScreen(),
-    RequestsPage(),
+    AddCategoryPage(),
     FavoriteScreen(),
     HomePage(),
   ];
@@ -472,7 +472,6 @@ class DalilyCubit extends Cubit<DalilyState> {
     },
   ];
 
-<<<<<<< HEAD
   Future<void> fetchCategoryData(String tableName, {String? query}) async
   {
     try {
@@ -488,14 +487,6 @@ class DalilyCubit extends Cubit<DalilyState> {
       }
 
       final response = await request;
-=======
-  Future<void> fetchCategoryData(String tableName) async {
-    try {
-      emit(CategoryLoadingState());
-
-      final response = await Supabase.instance.client.from(tableName).select(
-          'name, description, imageUrl,facebookLink,youtypeLink,whatsAppLink,locationLink,phoneLink,location,number');
->>>>>>> origin/main
 
       if (response.isEmpty) {
         emit(CategoryError('No data found for table "$tableName".'));
@@ -504,11 +495,7 @@ class DalilyCubit extends Cubit<DalilyState> {
 
       final List<Category> categories = response.map<Category>((item) {
         return Category(
-<<<<<<< HEAD
           id: 0, // لأنك مش جايب الـ id من الجدول
-=======
-          id: (item['id'] ?? 1) as int, // استخدم 0 أو أي قيمة افتراضية رقمية
->>>>>>> origin/main
           name: item['name'] ?? 'No Name',
           description: item['description'] ?? 'No Description',
           imageUrl: item['imageUrl'] ?? '',
