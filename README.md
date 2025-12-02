@@ -1,9 +1,26 @@
-# 📱 Dalily App – City Services Guide  
+📱 Dalily App – City Services Guide
 
-A mobile application that works as a complete city guide, helping users easily find essential services in their city.  
+A mobile application that works as a complete city guide, helping users easily find essential services in their city.
 
----
+This app is designed for both users and service providers, making it easy to navigate city services and manage offerings efficiently.
 
+🎯 Features / مميزات التطبيق
+
+For Users / للمستخدمين:
+
+Find pharmacies, doctors, labs, restaurants, and other city services.
+
+Search and filter services by category.
+
+User-friendly design with smooth navigation.
+
+For Service Providers / للتجار ومقدمي الخدمات:
+
+Add their own service from inside the app.
+
+Admin approval process ensures quality control.
+
+Once approved, the service appears immediately in the correct category.
 ## 📱 Screenshots  
 
 <img width="518" height="869" alt="Screenshot 2025-08-24 132441" src="https://github.com/user-attachments/assets/5ca9f0a7-6618-4676-b451-beb3e89cd82e" />  
@@ -47,3 +64,49 @@ A mobile application that works as a complete city guide, helping users easily f
 ---
 
 <img width="494" height="861" alt="Screenshot 2025-08-24 132445" src="https://github.com/user-attachments/assets/ecdfcceb-fb57-4910-a750-88410d56c0ba" />  
+
+🛠️ Built With / التقنيات المستخدمة
+
+Flutter – Cross-platform mobile framework
+
+Dart – Programming language
+
+Firebase (if used for authentication/data)
+
+Packages: Dio, Provider, Lottie, etc.
+
+🚀 Getting Started / تشغيل التطبيق
+
+Clone the repo:
+
+git clone https://github.com/AbdElhamidShahin/daliliy_App.git
+
+
+Navigate to the project directory:
+
+cd daliliy_App
+
+
+Install dependencies:
+
+flutter pub get
+
+
+Run the app:
+
+flutter run
+
+🔮 Future Improvements / التطوير المستقبلي
+
+Release on Google Play & App Store.
+
+Add live services with real data.
+
+Multi-language support.
+
+Advanced search, filtering, and sorting options.
+
+📩 Feedback / الملاحظات
+
+This app is experimental.
+Looking forward to your feedback and suggestions to improve it!
